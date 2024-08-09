@@ -10,17 +10,22 @@ import SwiftData
 
 @Model
 final class Scenario {
+    @Attribute(.unique) var id: UUID
     var title: String
     var timestamp: Date
-    var personsCount: Int
     var plot: String?
     var author: String?
+    var actors: [Actor]
+    var speeches: [Speech]
     
-    init(timestamp: Date, title: String, plot: Optional<String>, author: Optional<String>) {
-        self.timestamp = timestamp
+    init(title: String, timestamp: Date, plot: String? = nil, author: String? = nil, actors: [Actor] = [], speeches: [Speech] = []) {
+        self.id = UUID()
         self.title = title
+        self.timestamp = timestamp
         self.plot = plot
-        self.author = author       
-        self.personsCount = 5
+        self.author = author
+        self.actors = actors
+        self.speeches = speeches
     }
+    
 }

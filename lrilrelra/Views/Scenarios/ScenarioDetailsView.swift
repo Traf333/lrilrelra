@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct ScenarioDetailsView: View {
+    let scenario: Scenario
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text(scenario.title).font(.largeTitle)
+            Text("Item at \(scenario.timestamp, format: Date.FormatStyle(date: .numeric))")
+        }.toolbar(.hidden, for: .tabBar)
     }
 }
 
 #Preview {
-    ScenarioDetailsView()
+    ScenarioDetailsView(scenario: Scenario(title: "Some", timestamp: Date()))
 }

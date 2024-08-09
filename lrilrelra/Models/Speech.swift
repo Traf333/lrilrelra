@@ -6,3 +6,21 @@
 //
 
 import Foundation
+import SwiftData
+
+@Model
+final class Speech {
+    @Attribute(.unique) var id: UUID
+    var content: String
+    var position: Int
+    var audioVersions: [URL]
+    @Relationship var actor: Actor?
+    
+    init(content: String, position: Int, actor: Actor?) {
+        self.id = UUID()
+        self.content = content
+        self.position = position
+        self.audioVersions = []
+        self.actor = actor
+    }
+}

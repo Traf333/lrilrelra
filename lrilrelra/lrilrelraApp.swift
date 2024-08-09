@@ -8,11 +8,13 @@
 import SwiftUI
 import SwiftData
 
+
+
 @main
-struct lrilrelraApp: App {
+struct lrilrelraApp: App {     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Scenario.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -28,5 +30,6 @@ struct lrilrelraApp: App {
             ContentView()
         }
         .modelContainer(sharedModelContainer)
+        
     }
 }
