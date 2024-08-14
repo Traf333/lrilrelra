@@ -34,5 +34,5 @@ struct ContentView: View {
 
 #Preview {
     
-    ContentView().modelContainer(for: Scenario.self, inMemory: true).previewDisplayName("Tab bar visible")
+    ContentView().modelContainer(for: Scenario.self).previewDisplayName("Tab bar visible")
 }

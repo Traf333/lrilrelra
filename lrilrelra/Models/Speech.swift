@@ -14,7 +14,7 @@ final class Speech {
     var content: String
     var position: Int
     var audioVersions: [URL]
-    @Relationship var actor: Actor?
+    var actor: Actor?
     
     init(content: String, position: Int, actor: Actor?) {
         self.id = UUID()

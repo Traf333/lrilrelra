@@ -7,7 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FBD888F82C6606BE00BD9D73 /* lrilrelraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD888F72C6606BE00BD9D73 /* lrilrelraApp.swift */; };
+		FB0EB0C72C6A174100E5A859 /* EditSpeechView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EB0C62C6A174100E5A859 /* EditSpeechView.swift */; };
+		FB0EB0CC2C6B4F8700E5A859 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB0EB0CB2C6B4F8700E5A859 /* Launch Screen.storyboard */; };
+		FB0EB0D22C6B562F00E5A859 /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EB0D12C6B562F00E5A859 /* LibraryViewModel.swift */; };
+		FB0EB0D42C6B56AE00E5A859 /* ScenarioAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EB0D32C6B56AE00E5A859 /* ScenarioAPI.swift */; };
+		FB0EB0D62C6B5A3B00E5A859 /* ScenarioRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EB0D52C6B5A3B00E5A859 /* ScenarioRemote.swift */; };
+		FB0EB0D82C6CB1EA00E5A859 /* ScenarioRemoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EB0D72C6CB1EA00E5A859 /* ScenarioRemoteView.swift */; };
+		FB0EB0DA2C6CB80B00E5A859 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EB0D92C6CB80B00E5A859 /* DocumentPicker.swift */; };
+		FB0EB0DC2C6CB86300E5A859 /* AddScenarioModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EB0DB2C6CB86300E5A859 /* AddScenarioModalView.swift */; };
+		FB0EB0E02C6CBB1900E5A859 /* zov.txt in Resources */ = {isa = PBXBuildFile; fileRef = FB0EB0DF2C6CBB1900E5A859 /* zov.txt */; };
+		FBD888F82C6606BE00BD9D73 /* Lrilrelra.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD888F72C6606BE00BD9D73 /* Lrilrelra.swift */; };
 		FBD888FA2C6606BE00BD9D73 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD888F92C6606BE00BD9D73 /* ContentView.swift */; };
 		FBD888FC2C6606BE00BD9D73 /* Scenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD888FB2C6606BE00BD9D73 /* Scenario.swift */; };
 		FBD888FE2C6606BF00BD9D73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBD888FD2C6606BF00BD9D73 /* Assets.xcassets */; };
@@ -41,8 +50,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FB0EB0C62C6A174100E5A859 /* EditSpeechView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSpeechView.swift; sourceTree = "<group>"; };
+		FB0EB0CB2C6B4F8700E5A859 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		FB0EB0D12C6B562F00E5A859 /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
+		FB0EB0D32C6B56AE00E5A859 /* ScenarioAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioAPI.swift; sourceTree = "<group>"; };
+		FB0EB0D52C6B5A3B00E5A859 /* ScenarioRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioRemote.swift; sourceTree = "<group>"; };
+		FB0EB0D72C6CB1EA00E5A859 /* ScenarioRemoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioRemoteView.swift; sourceTree = "<group>"; };
+		FB0EB0D92C6CB80B00E5A859 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
+		FB0EB0DB2C6CB86300E5A859 /* AddScenarioModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScenarioModalView.swift; sourceTree = "<group>"; };
+		FB0EB0DF2C6CBB1900E5A859 /* zov.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = zov.txt; sourceTree = "<group>"; };
 		FBD888F42C6606BE00BD9D73 /* lrilrelra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lrilrelra.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FBD888F72C6606BE00BD9D73 /* lrilrelraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lrilrelraApp.swift; sourceTree = "<group>"; };
+		FBD888F72C6606BE00BD9D73 /* Lrilrelra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lrilrelra.swift; sourceTree = "<group>"; };
 		FBD888F92C6606BE00BD9D73 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FBD888FB2C6606BE00BD9D73 /* Scenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenario.swift; sourceTree = "<group>"; };
 		FBD888FD2C6606BF00BD9D73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,6 +103,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FB0EB0C52C6A173200E5A859 /* Speeches */ = {
+			isa = PBXGroup;
+			children = (
+				FB0EB0C62C6A174100E5A859 /* EditSpeechView.swift */,
+			);
+			path = Speeches;
+			sourceTree = "<group>";
+		};
+		FB0EB0CD2C6B535B00E5A859 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FB0EB0D12C6B562F00E5A859 /* LibraryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FB0EB0CE2C6B536900E5A859 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FB0EB0D32C6B56AE00E5A859 /* ScenarioAPI.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		FB0EB0CF2C6B537400E5A859 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				FB0EB0D92C6CB80B00E5A859 /* DocumentPicker.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		FB0EB0D02C6B538200E5A859 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FB0EB0DF2C6CBB1900E5A859 /* zov.txt */,
+				FB0EB0CB2C6B4F8700E5A859 /* Launch Screen.storyboard */,
+				FBD888FD2C6606BF00BD9D73 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		FBD888EB2C6606BE00BD9D73 = {
 			isa = PBXGroup;
 			children = (
@@ -108,11 +168,14 @@
 		FBD888F62C6606BE00BD9D73 /* lrilrelra */ = {
 			isa = PBXGroup;
 			children = (
+				FB0EB0D02C6B538200E5A859 /* Resources */,
+				FB0EB0CF2C6B537400E5A859 /* Utility */,
+				FB0EB0CE2C6B536900E5A859 /* Network */,
+				FB0EB0CD2C6B535B00E5A859 /* ViewModel */,
 				FBD8892D2C6629B900BD9D73 /* Models */,
 				FBD889232C66252800BD9D73 /* Views */,
-				FBD888F72C6606BE00BD9D73 /* lrilrelraApp.swift */,
+				FBD888F72C6606BE00BD9D73 /* Lrilrelra.swift */,
 				FBD888F92C6606BE00BD9D73 /* ContentView.swift */,
-				FBD888FD2C6606BF00BD9D73 /* Assets.xcassets */,
 				FBD888FF2C6606BF00BD9D73 /* Preview Content */,
 			);
 			path = lrilrelra;
@@ -146,6 +209,7 @@
 		FBD889232C66252800BD9D73 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FB0EB0C52C6A173200E5A859 /* Speeches */,
 				FBD889262C66256100BD9D73 /* Settings */,
 				FBD889252C66255700BD9D73 /* Library */,
 				FBD889242C66253F00BD9D73 /* Scenarios */,
@@ -166,6 +230,8 @@
 			isa = PBXGroup;
 			children = (
 				FBD889292C66264800BD9D73 /* LibraryView.swift */,
+				FB0EB0D72C6CB1EA00E5A859 /* ScenarioRemoteView.swift */,
+				FB0EB0DB2C6CB86300E5A859 /* AddScenarioModalView.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -184,6 +250,7 @@
 				FBD888FB2C6606BE00BD9D73 /* Scenario.swift */,
 				FBD889302C662A2E00BD9D73 /* Actor.swift */,
 				FBD8892E2C6629D500BD9D73 /* Speech.swift */,
+				FB0EB0D52C6B5A3B00E5A859 /* ScenarioRemote.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -292,6 +359,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB0EB0E02C6CBB1900E5A859 /* zov.txt in Resources */,
+				FB0EB0CC2C6B4F8700E5A859 /* Launch Screen.storyboard in Resources */,
 				FBD889012C6606BF00BD9D73 /* Preview Assets.xcassets in Resources */,
 				FBD888FE2C6606BF00BD9D73 /* Assets.xcassets in Resources */,
 			);
@@ -320,12 +389,19 @@
 			files = (
 				FBD889282C66257F00BD9D73 /* ScenariosView.swift in Sources */,
 				FBD888FA2C6606BE00BD9D73 /* ContentView.swift in Sources */,
+				FB0EB0D22C6B562F00E5A859 /* LibraryViewModel.swift in Sources */,
 				FBD888FC2C6606BE00BD9D73 /* Scenario.swift in Sources */,
 				FBD8892F2C6629D500BD9D73 /* Speech.swift in Sources */,
+				FB0EB0D62C6B5A3B00E5A859 /* ScenarioRemote.swift in Sources */,
 				FBD8892C2C66265300BD9D73 /* SettingsView.swift in Sources */,
+				FB0EB0D42C6B56AE00E5A859 /* ScenarioAPI.swift in Sources */,
 				FBD889332C66407000BD9D73 /* ScenarioDetailsView.swift in Sources */,
+				FB0EB0C72C6A174100E5A859 /* EditSpeechView.swift in Sources */,
+				FB0EB0DC2C6CB86300E5A859 /* AddScenarioModalView.swift in Sources */,
 				FBD8892A2C66264800BD9D73 /* LibraryView.swift in Sources */,
-				FBD888F82C6606BE00BD9D73 /* lrilrelraApp.swift in Sources */,
+				FBD888F82C6606BE00BD9D73 /* Lrilrelra.swift in Sources */,
+				FB0EB0D82C6CB1EA00E5A859 /* ScenarioRemoteView.swift in Sources */,
+				FB0EB0DA2C6CB80B00E5A859 /* DocumentPicker.swift in Sources */,
 				FBD889312C662A2E00BD9D73 /* Actor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,9 +569,10 @@
 				DEVELOPMENT_TEAM = W2X455W23A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = lrilrelra/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -522,9 +599,10 @@
 				DEVELOPMENT_TEAM = W2X455W23A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = lrilrelra/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
