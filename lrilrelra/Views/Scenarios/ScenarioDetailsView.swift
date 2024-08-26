@@ -11,7 +11,7 @@ import SwiftData
 struct ScenarioDetailsView: View {
     var scenario: Scenario
     @Query private var speeches: [Speech]
-    
+    @Binding var showTabBar: Bool
     var body: some View {
         VStack(alignment: .leading) {
             Text("Item at \(scenario.timestamp, format: Date.FormatStyle(date: .numeric))")
@@ -32,8 +32,8 @@ struct ScenarioDetailsView: View {
                 }
             }
         }.padding()
-        .toolbar(.hidden, for: .tabBar)
         .navigationTitle(scenario.title)
+        .toolbar(showTabBar ? .visible : .hidden, for: .tabBar)
     }
     
     private func selectRole() {
@@ -42,7 +42,7 @@ struct ScenarioDetailsView: View {
     
 }
 
-
-#Preview {
-    ScenarioDetailsView(scenario: Scenario(title: "Some", timestamp: Date(), speeches:  []))
-}
+//
+//#Preview {
+//    ScenarioDetailsView(scenario: Scenario(title: "Some", timestamp: Date(), speeches:  []), showTabBar: Binding)
+//}

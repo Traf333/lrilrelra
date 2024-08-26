@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ScenarioRemoteView: View {
+    @Environment(\.modelContext) private var modelContext
     @ObservedObject var viewModel: LibraryViewModel
     var scenario: ScenarioRemote
-    
+    var canDelete = false
     var body: some View {
         VStack(alignment: .leading) {
             List {
@@ -22,25 +23,35 @@ struct ScenarioRemoteView: View {
             
         }
         .navigationTitle(scenario.title)
-        .navigationBarItems(trailing: Button("Delete") {
-            if let id = scenario.id {
-                viewModel.deleteScenario(id: id)
+        .navigationBarItems(trailing: HStack {
+            Button("Save", systemImage: "square.and.arrow.down.on.square") {
+                addItem()
             }
-        })
+            if canDelete {
+                Button("Delete", systemImage: "trash") {
+                    if let id = scenario.uniqID {
+                        viewModel.deleteScenario(id: id)
+                    }
+                }
+            }
+        }).toolbar(.hidden, for: .tabBar)
 
     }
+    
+    private func addItem() {
+        var position = 0
+        let speeches: [Speech] = scenario.content.split(separator: "\n").map {
+            position += 1
+            
+            return Speech(content: String( $0), position: position,actor: nil)
+        }
+        let newItem = Scenario(title: scenario.title, timestamp: Date(), plot: "", author: scenario.author, actors: [], speeches: speeches)
+            modelContext.insert(newItem)
+    
+    }
+
 }
 
 #Preview {
-    func loadTextFile(fileName: String) -> String {
-        if let url = Bundle.main.url(forResource: fileName, withExtension: "txt"),
-           let content = try? String(contentsOf: url) {
-            return content
-        }
-        return "Failed to load content."
-    }
-    
-    let content = loadTextFile(fileName: "zov")
-    
-    return ScenarioRemoteView(viewModel: LibraryViewModel(), scenario: ScenarioRemote(title: "Banana dance", content: content, actorsNumber: 5))
+    LibraryView(viewModel: LibraryViewModel.mock())
 }

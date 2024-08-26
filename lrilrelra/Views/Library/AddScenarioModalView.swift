@@ -11,6 +11,7 @@ import UniformTypeIdentifiers
 struct AddScenarioModalView: View {
     @Binding var isPresented: Bool
     @Binding var newTitle: String
+    @Binding var newAuthor: String
     @Binding var newActorsNumber: Int
     @Binding var newContent: String
     var onSubmit: () -> Void
@@ -21,6 +22,7 @@ struct AddScenarioModalView: View {
                 Form {
                     Section(header: Text("Scenario Details")) {
                         TextField("Title", text: $newTitle)
+                        TextField("Author", text: $newAuthor)
                         
                         Stepper(value: $newActorsNumber, in: 1...20) {
                             Text("Number of Actors: \(newActorsNumber)")
@@ -61,6 +63,3 @@ struct FilePickerView: View {
     }
 }
 
-//#Preview {
-//    AddScenarioModalView(isPresented: <#T##Binding<Bool>#>, newTitle: <#T##Binding<String>#>, newActorsNumber: <#T##Binding<Int>#>, newContent: <#T##Binding<String>#>, onSubmit: <#T##() -> Void#>)
-//}

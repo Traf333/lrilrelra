@@ -11,13 +11,17 @@ import SwiftData
 struct ScenariosView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var scenarios: [Scenario]
-    
+    @State private var showTabBar = true
     var body: some View {
         NavigationSplitView {
             List {
                 ForEach(scenarios) { item in
                     NavigationLink {
-                        ScenarioDetailsView(scenario: item).toolbar(.hidden, for: .tabBar)
+                        ScenarioDetailsView(scenario: item, showTabBar: $showTabBar).onAppear {
+                            self.showTabBar = false
+                        }.onDisappear {
+                            self.showTabBar = true
+                        }
                             
                      
                     } label: {

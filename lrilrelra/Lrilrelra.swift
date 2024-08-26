@@ -11,7 +11,7 @@ import SwiftData
 
 
 @main
-struct Reps: App {     
+struct Lrilrelra: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Scenario.self,
