@@ -43,9 +43,9 @@ struct ScenarioRemoteView: View {
         let speeches: [Speech] = scenario.content.split(separator: "\n").map {
             position += 1
             
-            return Speech(content: String( $0), position: position,actor: nil)
+            return Speech(content: String($0), position: position)
         }
-        let newItem = Scenario(title: scenario.title, timestamp: Date(), plot: "", author: scenario.author, actors: [], speeches: speeches)
+        let newItem = Scenario(title: scenario.title, timestamp: Date(), plot: "", author: scenario.author, roles: "A, B", speeches: speeches)
             modelContext.insert(newItem)
     
     }
@@ -53,5 +53,5 @@ struct ScenarioRemoteView: View {
 }
 
 #Preview {
-    LibraryView(viewModel: LibraryViewModel.mock())
+    LibraryView()
 }

@@ -14,16 +14,6 @@ class LibraryViewModel: ObservableObject {
         fetchScenarios()
     }
     
-    static func mock() -> LibraryViewModel {
-        let viewModel = LibraryViewModel()
-        viewModel.scenarios = [
-            ScenarioRemote(title: "Sample Scenario 1", content: "Sample Content 1", author: "Author 1", actorsNumber: 2),
-            ScenarioRemote(title: "Sample Scenario 2", content: "Sample Content 2", author: "Author 2", actorsNumber: 4),
-            ScenarioRemote(title: "Sample Scenario 3", content: "Sample Content 3", author: "Author 3", actorsNumber: 3)
-        ]
-        return viewModel
-    }
-    
     func fetchScenarios() {
         ScenarioAPI.shared.fetchScenarios { scenarios in
             DispatchQueue.main.async {

@@ -10,39 +10,75 @@ import SwiftData
 
 struct ScenarioDetailsView: View {
     var scenario: Scenario
-    @Query private var speeches: [Speech]
-    @Binding var showTabBar: Bool
+    
+    @State var selectedRole: Role? = nil
+    @State var showRoleSelector = false
+    
+    var roles = [Role(name: "Лиля", aliases: ["Лилия"]), Role(name: "Сергей Геннадьевич", aliases: ["С.Г"])]
+    
     var body: some View {
+        
         VStack(alignment: .leading) {
-            Text("Item at \(scenario.timestamp, format: Date.FormatStyle(date: .numeric))")
-            
             List {
-                ForEach(speeches) { speech in
+                ForEach(scenario.speeches.sorted(by: {$0.position < $1.position})) { speech in
                     VStack(alignment: .leading) {
-                        Text("Position: \(speech.position)")
-                        Text(speech.content)
+                        Text(speech.content).opacity(getOpacity(speech.content))
+                    }
+                    .listRowSeparator(.hidden)
+                    //                    .listRowInsets(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 0))
+                }
+            }.listStyle(PlainListStyle())
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {showRoleSelector = true}) {
+                            Image(systemName: "person.2").foregroundColor(selectedRole != nil ? .blue : .gray)
+                            
+                            
+                        }
                     }
                 }
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: selectRole) {
-                        Label("Add Speech", systemImage: "users")
-                    }
-                }
-            }
-        }.padding()
+        }
         .navigationTitle(scenario.title)
-        .toolbar(showTabBar ? .visible : .hidden, for: .tabBar)
+        .sheet(isPresented: $showRoleSelector) {
+            RoleSelectorView(selectedRole: $selectedRole, roles: roles) {
+                showRoleSelector = false
+            }.presentationDragIndicator(.visible)
+        }
+        
     }
     
-    private func selectRole() {
-        
+    private func getOpacity(_ content: String) -> Double {
+        if let selectedRole = selectedRole {
+            let allNames = [selectedRole.name] + selectedRole.aliases
+            
+            if allNames.contains(where: {name in content.hasPrefix(name)}) {
+                return 1
+            } else {
+                return 0.5
+            }
+        } else {
+            return 1
+        }
     }
     
 }
 
-//
-//#Preview {
-//    ScenarioDetailsView(scenario: Scenario(title: "Some", timestamp: Date(), speeches:  []), showTabBar: Binding)
-//}
+#Preview {
+    let container = try! ModelContainer(for: Scenario.self) // Use inMemory storage for previews
+    
+    // Add a sample scenario to the in-memory container for preview
+    let context = ModelContext(container)
+    
+    
+    // Fetch the first scenario from the context for preview
+    if let firstScenario = try? context.fetch(FetchDescriptor<Scenario>()).first {
+        return NavigationStack {
+            ScenarioDetailsView(scenario: firstScenario)
+                .modelContainer(container)
+        }
+    } else {
+        return Text("problem to preview")
+    }
+}
+
+

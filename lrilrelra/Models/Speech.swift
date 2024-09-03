@@ -13,14 +13,10 @@ final class Speech {
     @Attribute(.unique) var id: UUID
     var content: String
     var position: Int
-    var audioVersions: [URL]
-    var actor: Actor?
     
-    init(content: String, position: Int, actor: Actor?) {
+    init(content: String, position: Int) {
         self.id = UUID()
         self.content = content
         self.position = position
-        self.audioVersions = []
-        self.actor = actor
     }
 }

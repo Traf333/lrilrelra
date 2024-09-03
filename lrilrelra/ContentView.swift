@@ -57,21 +57,14 @@ extension EnvironmentValues {
 }
 
 struct ContentView: View {
-    @State private var selectedTab: AppScreen = .scenarios
+    
     var body: some View {
-        TabView(selection: $selectedTab) {
-            ForEach(AppScreen.allCases) {screen in
-                screen.destination
-                    .tag(screen as AppScreen?)
-                    .tabItem { screen.label }
-            }
-        }
-        .environment(\.currentTab, $selectedTab)
+        ScenariosView()
         .environment(Router())
     }
 }
 
 
 #Preview {
-    ContentView().modelContainer(for: Scenario.self).previewDisplayName("Tab bar visible").preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+    ContentView().modelContainer(for: Scenario.self)
 }

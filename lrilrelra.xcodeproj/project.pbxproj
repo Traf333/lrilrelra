@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FB0EB0C72C6A174100E5A859 /* EditSpeechView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EB0C62C6A174100E5A859 /* EditSpeechView.swift */; };
 		FB0EB0CC2C6B4F8700E5A859 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB0EB0CB2C6B4F8700E5A859 /* Launch Screen.storyboard */; };
 		FB0EB0D22C6B562F00E5A859 /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EB0D12C6B562F00E5A859 /* LibraryViewModel.swift */; };
 		FB0EB0D42C6B56AE00E5A859 /* ScenarioAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EB0D32C6B56AE00E5A859 /* ScenarioAPI.swift */; };
@@ -29,8 +28,8 @@
 		FBD8892A2C66264800BD9D73 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD889292C66264800BD9D73 /* LibraryView.swift */; };
 		FBD8892C2C66265300BD9D73 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD8892B2C66265300BD9D73 /* SettingsView.swift */; };
 		FBD8892F2C6629D500BD9D73 /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD8892E2C6629D500BD9D73 /* Speech.swift */; };
-		FBD889312C662A2E00BD9D73 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD889302C662A2E00BD9D73 /* Actor.swift */; };
 		FBD889332C66407000BD9D73 /* ScenarioDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD889322C66407000BD9D73 /* ScenarioDetailsView.swift */; };
+		FBEF3BDE2C871EA500D1886F /* RoleSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEF3BDD2C871EA500D1886F /* RoleSelectorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +50,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FB0EB0C62C6A174100E5A859 /* EditSpeechView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSpeechView.swift; sourceTree = "<group>"; };
 		FB0EB0CB2C6B4F8700E5A859 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		FB0EB0D12C6B562F00E5A859 /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
 		FB0EB0D32C6B56AE00E5A859 /* ScenarioAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioAPI.swift; sourceTree = "<group>"; };
@@ -76,8 +74,8 @@
 		FBD889292C66264800BD9D73 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		FBD8892B2C66265300BD9D73 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FBD8892E2C6629D500BD9D73 /* Speech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speech.swift; sourceTree = "<group>"; };
-		FBD889302C662A2E00BD9D73 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		FBD889322C66407000BD9D73 /* ScenarioDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioDetailsView.swift; sourceTree = "<group>"; };
+		FBEF3BDD2C871EA500D1886F /* RoleSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +106,6 @@
 		FB0EB0C52C6A173200E5A859 /* Speeches */ = {
 			isa = PBXGroup;
 			children = (
-				FB0EB0C62C6A174100E5A859 /* EditSpeechView.swift */,
 			);
 			path = Speeches;
 			sourceTree = "<group>";
@@ -225,6 +222,7 @@
 			children = (
 				FBD889272C66257F00BD9D73 /* ScenariosView.swift */,
 				FBD889322C66407000BD9D73 /* ScenarioDetailsView.swift */,
+				FBEF3BDD2C871EA500D1886F /* RoleSelectorView.swift */,
 			);
 			path = Scenarios;
 			sourceTree = "<group>";
@@ -251,7 +249,6 @@
 			isa = PBXGroup;
 			children = (
 				FBD888FB2C6606BE00BD9D73 /* Scenario.swift */,
-				FBD889302C662A2E00BD9D73 /* Actor.swift */,
 				FBD8892E2C6629D500BD9D73 /* Speech.swift */,
 				FB0EB0D52C6B5A3B00E5A859 /* ScenarioRemote.swift */,
 			);
@@ -397,16 +394,15 @@
 				FBD8892F2C6629D500BD9D73 /* Speech.swift in Sources */,
 				FB0EB0D62C6B5A3B00E5A859 /* ScenarioRemote.swift in Sources */,
 				FBD8892C2C66265300BD9D73 /* SettingsView.swift in Sources */,
+				FBEF3BDE2C871EA500D1886F /* RoleSelectorView.swift in Sources */,
 				FB0EB0D42C6B56AE00E5A859 /* ScenarioAPI.swift in Sources */,
 				FBD889332C66407000BD9D73 /* ScenarioDetailsView.swift in Sources */,
-				FB0EB0C72C6A174100E5A859 /* EditSpeechView.swift in Sources */,
 				FB5947EA2C7CBD6C006E3E10 /* Router.swift in Sources */,
 				FB0EB0DC2C6CB86300E5A859 /* AddScenarioModalView.swift in Sources */,
 				FBD8892A2C66264800BD9D73 /* LibraryView.swift in Sources */,
 				FBD888F82C6606BE00BD9D73 /* Lrilrelra.swift in Sources */,
 				FB0EB0D82C6CB1EA00E5A859 /* ScenarioRemoteView.swift in Sources */,
 				FB0EB0DA2C6CB80B00E5A859 /* DocumentPicker.swift in Sources */,
-				FBD889312C662A2E00BD9D73 /* Actor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

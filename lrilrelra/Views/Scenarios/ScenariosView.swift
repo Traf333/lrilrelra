@@ -8,21 +8,33 @@
 import SwiftUI
 import SwiftData
 
+enum AddFromSource: String, Identifiable {
+    case library = "library"
+    case file = "file"
+    
+    var id: String { self.rawValue }
+}
+
 struct ScenariosView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var scenarios: [Scenario]
-    @State private var showTabBar = true
+    @State private var addNewScenario = false
+    
+    @State private var addFromSource: AddFromSource? = nil
+    @State private var isPresentingAddModal = false
+    @State private var newTitle = ""
+    @State private var newAuthor = ""
+    @State private var newActorsNumber = 1
+    @State private var newContent = ""
+    
+    var viewModel = LibraryViewModel()
+    
     var body: some View {
-        NavigationSplitView {
+        NavigationView {
             List {
                 ForEach(scenarios) { item in
                     NavigationLink {
-                        ScenarioDetailsView(scenario: item, showTabBar: $showTabBar).onAppear {
-                            self.showTabBar = false
-                        }.onDisappear {
-                            self.showTabBar = true
-                        }
-                            
+                        ScenarioDetailsView(scenario: item)
                      
                     } label: {
                         VStack(alignment: .leading, content: {
@@ -34,9 +46,9 @@ struct ScenariosView: View {
                             HStack {
                                 Text(item.timestamp, format: Date.FormatStyle(date: .numeric))
                                 
-                                if item.actors.count > 0 {
+                                if item.roles.count > 0 {
                                     HStack {
-                                        Text("\(item.actors.count)")
+                                        Text("\(item.roles.count)")
                                         Image(systemName: "person.2.fill")
                                     }
                                 }
@@ -53,23 +65,43 @@ struct ScenariosView: View {
                     EditButton()
                 }
                 ToolbarItem {
-                    Button(action: addItem) {
+                    Button(action: { addNewScenario = true }) {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
             }
-        } detail: {
-            Text("Select an item")
+            .sheet(isPresented: $addNewScenario) {
+                VStack(spacing: 16.0) {
+                    Button("Add From File") {
+                        addFromSource = .file
+                        addNewScenario = false
+                       
+                    }
+                    Button("Add From Library") {
+                        addFromSource = .library
+                        addNewScenario = false
+
+                    }
+                }
+                .font(.title)
+                .presentationDetents([.height(200)])
+            }
+            .sheet(item: $addFromSource) { source in
+                VStack {
+                    if source == .library {
+                        LibraryView()
+                    } else if source == .file {
+                        AddScenarioModalView(isPresented: $isPresentingAddModal, newTitle: $newTitle, newAuthor: $newAuthor,  newActorsNumber: $newActorsNumber, newContent: $newContent) {
+                            // Submit button action
+                            viewModel.addScenario(title: newTitle, author: newAuthor, content: newContent, actorsNumber: newActorsNumber)
+                            addFromSource = nil
+                        }
+                    }
+                }.presentationDragIndicator(.visible)
+            }
         }
     }
     
-    private func addItem() {
-        withAnimation {
-            let newItem = Scenario(title: "Test", timestamp: Date(), plot: "", author: "Muzick", actors: [Actor(name: "Bob")])
-            modelContext.insert(newItem)
-        }
-    }
-
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
@@ -81,5 +113,5 @@ struct ScenariosView: View {
 
 #Preview {
     ScenariosView()
-        .modelContainer(for: Scenario.self, inMemory: true)
+        .modelContainer(for: Scenario.self)
 }

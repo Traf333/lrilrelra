@@ -8,23 +8,14 @@
 import SwiftUI
 
 struct LibraryView: View {
-    @Environment(Router.self) private var router
+
     @StateObject var viewModel: LibraryViewModel = LibraryViewModel()
-    @State private var isPresentingAddModal = false
-    @State private var newTitle = ""
-    @State private var newAuthor = ""
-    @State private var newActorsNumber = 1
-    @State private var newContent = ""
-    //
-    //    init(viewModel: LibraryViewModel = LibraryViewModel()) {
-    //            _viewModel = StateObject(wrappedValue: viewModel)
-    //        }
-    //
+    
     var body: some View {
-        @Bindable var router = router
+
         
         
-        NavigationStack(path: $router.libraryRoutes) {
+        NavigationStack {
             List(viewModel.scenarios, id: \.uniqID) { scenario in
                 NavigationLink(destination: ScenarioRemoteView(viewModel: viewModel, scenario: scenario)) {
                     VStack(alignment: .leading) {
@@ -45,21 +36,10 @@ struct LibraryView: View {
                     }
                 }
             }
-            .navigationTitle("")
-            .navigationBarItems(trailing: Button("Add") {
-                isPresentingAddModal = true
-            })
-            .sheet(isPresented: $isPresentingAddModal) {
-                AddScenarioModalView(isPresented: $isPresentingAddModal, newTitle: $newTitle, newAuthor: $newAuthor,  newActorsNumber: $newActorsNumber, newContent: $newContent) {
-                    // Submit button action
-                    viewModel.addScenario(title: newTitle, author: newAuthor, content: newContent, actorsNumber: newActorsNumber)
-                    isPresentingAddModal = false
-                }
-            }
         }
     }
 }
 
 #Preview {
-    ContentView().modelContainer(for: Scenario.self).previewDisplayName("Tab bar visible")
+    ContentView().modelContainer(for: Scenario.self)
 }
