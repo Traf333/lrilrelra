@@ -6,52 +6,103 @@
 //
 
 import SwiftUI
-import SwiftData
+import RealmSwift
 
 struct ScenarioDetailsView: View {
-    var scenario: Scenario
+    @AppStorage("lastSpeechId") private var lastSpeechId: Int?
+    @ObservedRealmObject var scenario: Scenario
     
     @State var selectedRole: Role? = nil
-    @State var showRoleSelector = false
+    @State var current: [Speech] = []
     
-    var roles = [Role(name: "Лиля", aliases: ["Лилия"]), Role(name: "Сергей Геннадьевич", aliases: ["С.Г"])]
+    
+    // Timer to periodically save the first visible speech ID
+    let saveInterval = 10.0 // Time interval in seconds
+    @State private var timer: Timer? = nil
     
     var body: some View {
-        
         VStack(alignment: .leading) {
-            List {
-                ForEach(scenario.speeches.sorted(by: {$0.position < $1.position})) { speech in
-                    VStack(alignment: .leading) {
-                        Text(speech.content).opacity(getOpacity(speech.content))
-                    }
-                    .listRowSeparator(.hidden)
-                    //                    .listRowInsets(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 0))
-                }
-            }.listStyle(PlainListStyle())
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {showRoleSelector = true}) {
-                            Image(systemName: "person.2").foregroundColor(selectedRole != nil ? .blue : .gray)
-                            
-                            
+            ScrollViewReader { proxy in
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 0) {
+                        ForEach(scenario.speeches) { speech in
+                            SpeechRowView(speech: speech, onRoleSelect: selectRole, onDelete: {  deleteSpeech(speech: speech) })
+                                .id(speech.id)
+                                .opacity(getOpacity(speech.content))
+                                .onAppear {
+                                    current.append(speech)
+                                    print(">> added \(speech.id)")
+                                }
+                                .onDisappear {
+                                    current.removeAll { $0.id == speech.id }
+                                    print("<< removed \(speech.id)")
+                                }
                         }
                     }
+                    .padding(.horizontal)
                 }
+                //                .onAppear {
+                ////                     Restore scroll to the last saved speech ID
+                //                    if let lastSpeechId = lastSpeechId {
+                //                        print("Restoring scroll to speech with ID: \(lastSpeechId)")
+                //                        proxy.scrollTo(lastSpeechId, anchor: .top)
+                //                    } else {
+                //                        print("No saved speech ID found.")
+                //                    }
+                //
+                //                    // Start the timer when the view appears
+                //                    startTimer()
+                //                }
+                //                .onDisappear {
+                //                    // Stop the timer when the view disappears
+                //                    stopTimer()
+                //                }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink(destination: ScenarioEditView(scenario: scenario)) {
+                    Image(systemName: "square.and.pencil")
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink(destination: ScenarioEditView(scenario: scenario)) {
+                    Image(systemName: "square.and.pencil")
+                }
+            }
         }
         .navigationTitle(scenario.title)
-        .sheet(isPresented: $showRoleSelector) {
-            RoleSelectorView(selectedRole: $selectedRole, roles: roles) {
-                showRoleSelector = false
-            }.presentationDragIndicator(.visible)
-        }
         
+    }
+    
+    // Function to start the timer
+    private func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: saveInterval, repeats: true) { _ in
+            saveFirstVisibleSpeech()
+        }
+    }
+    
+    // Function to stop the timer
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    // Function to save the first visible speech
+    private func saveFirstVisibleSpeech() {
+        if let firstVisibleSpeech = current.first {
+            print("Saving first visible speech ID: \(firstVisibleSpeech.id)")
+            lastSpeechId = Int(firstVisibleSpeech.id)
+        } else {
+            print("No visible speech to save.")
+        }
     }
     
     private func getOpacity(_ content: String) -> Double {
         if let selectedRole = selectedRole {
-            let allNames = [selectedRole.name] + selectedRole.aliases
+            let allNames = [selectedRole.name] + selectedRole.aliases.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             
-            if allNames.contains(where: {name in content.hasPrefix(name)}) {
+            if allNames.contains(where: { name in content.hasPrefix(name) }) {
                 return 1
             } else {
                 return 0.5
@@ -61,23 +112,55 @@ struct ScenarioDetailsView: View {
         }
     }
     
+    func selectRole(_ content: String) {
+        // Search through each role in the scenario's roles list
+        for role in scenario.roles {
+            // Check if the role name is a prefix of the content
+            if content.starts(with: role.name) {
+                selectedRole = role
+                return
+            }
+            
+            // Split the role's aliases into an array by comma and check each alias
+            let aliasesArray = role.aliases.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            
+            for alias in aliasesArray {
+                if content.starts(with: alias) {
+                    selectedRole = role
+                    return
+                }
+            }
+        }
+        
+        // If no matching role is found, you can handle it here (e.g., set selectedRole to nil)
+        selectedRole = nil
+    }
+    
+    private func deleteSpeech(speech: Speech) {
+        do {
+            if let index = scenario.speeches.index(of: speech) {
+                let realm = try! Realm()
+                
+                try realm.write {
+                    // Remove the speech from the list
+                    print("start")
+                    // Optionally, delete the speech object from the Realm entirely
+                    $scenario.speeches.remove(at: index)
+                    print("mid")
+                    
+                    print("end")
+                }
+            }
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
 }
 
+
 #Preview {
-    let container = try! ModelContainer(for: Scenario.self) // Use inMemory storage for previews
-    
-    // Add a sample scenario to the in-memory container for preview
-    let context = ModelContext(container)
-    
-    
-    // Fetch the first scenario from the context for preview
-    if let firstScenario = try? context.fetch(FetchDescriptor<Scenario>()).first {
-        return NavigationStack {
-            ScenarioDetailsView(scenario: firstScenario)
-                .modelContainer(container)
-        }
-    } else {
-        return Text("problem to preview")
+    NavigationStack {
+        ScenarioDetailsView(scenario: Scenario.example())
     }
 }
 

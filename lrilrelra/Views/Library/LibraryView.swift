@@ -12,9 +12,6 @@ struct LibraryView: View {
     @StateObject var viewModel: LibraryViewModel = LibraryViewModel()
     
     var body: some View {
-
-        
-        
         NavigationStack {
             List(viewModel.scenarios, id: \.uniqID) { scenario in
                 NavigationLink(destination: ScenarioRemoteView(viewModel: viewModel, scenario: scenario)) {
@@ -31,7 +28,6 @@ struct LibraryView: View {
                                     Image(systemName: "person.2.fill")
                                 }
                             }
-                            
                         }.font(.caption).foregroundColor(.gray)
                     }
                 }
@@ -41,5 +37,5 @@ struct LibraryView: View {
 }
 
 #Preview {
-    ContentView().modelContainer(for: Scenario.self)
+    LibraryView()
 }

@@ -6,30 +6,15 @@
 //
 
 import SwiftUI
-import SwiftData
-
-
+import RealmSwift
 
 @main
-struct Lrilrelra: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Scenario.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
-
+struct Lrilrelra: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.realmConfiguration, Realm.Configuration(schemaVersion: 1))
+            
         }
-        .modelContainer(sharedModelContainer)
-        
     }
 }

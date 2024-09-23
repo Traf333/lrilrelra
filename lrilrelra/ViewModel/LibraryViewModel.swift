@@ -22,9 +22,7 @@ class LibraryViewModel: ObservableObject {
         }
     }
     
-    func addScenario(title: String, author: String, content: String, actorsNumber: Int) {
-        let newScenario = ScenarioRemote(title: title, content: content, author: author, actorsNumber: actorsNumber)
-        
+    func addScenario(_ newScenario: ScenarioRemote) {
         ScenarioAPI.shared.createScenario(scenario: newScenario) { success in
             if success?.id != nil {
                 self.fetchScenarios()

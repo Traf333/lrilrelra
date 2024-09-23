@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftData
+import RealmSwift
 
 enum AddFromSource: String, Identifiable {
     case library = "library"
@@ -16,8 +16,7 @@ enum AddFromSource: String, Identifiable {
 }
 
 struct ScenariosView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var scenarios: [Scenario]
+    @ObservedResults(Scenario.self) var scenarios
     @State private var addNewScenario = false
     
     @State private var addFromSource: AddFromSource? = nil
@@ -30,7 +29,7 @@ struct ScenariosView: View {
     var viewModel = LibraryViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(scenarios) { item in
                     NavigationLink {
@@ -40,11 +39,11 @@ struct ScenariosView: View {
                         VStack(alignment: .leading, content: {
                             Text(item.title).font(.headline)
                             
-                            if let author = item.author {
-                                Text(author).font(.subheadline).foregroundStyle(.secondary)
+                            if !item.author.isEmpty {
+                                Text(item.author).font(.subheadline).foregroundStyle(.secondary)
                             }
                             HStack {
-                                Text(item.timestamp, format: Date.FormatStyle(date: .numeric))
+                                Text(item.releaseDate, format: Date.FormatStyle(date: .numeric))
                                 
                                 if item.roles.count > 0 {
                                     HStack {
@@ -61,57 +60,77 @@ struct ScenariosView: View {
                 .onDelete(perform: deleteItems)
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: { addNewScenario = true }) {
-                        Label("Add Item", systemImage: "plus")
+                if !scenarios.isEmpty {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
+                    ToolbarItem {
+                        Button(action: { addNewScenario = true }) {
+                            Label("Add Item", systemImage: "plus")
+                        }
                     }
                 }
             }
             .sheet(isPresented: $addNewScenario) {
                 VStack(spacing: 16.0) {
-                    Button("Add From File") {
+                    Button("Add From File", systemImage: "plus") {
                         addFromSource = .file
                         addNewScenario = false
                        
                     }
-                    Button("Add From Library") {
+                    Button("Add From Library", systemImage: "book.pages") {
                         addFromSource = .library
                         addNewScenario = false
 
                     }
                 }
-                .font(.title)
-                .presentationDetents([.height(200)])
+                .font(.subheadline)
+                .presentationDetents([.height(100)])
             }
             .sheet(item: $addFromSource) { source in
                 VStack {
                     if source == .library {
                         LibraryView()
                     } else if source == .file {
-                        AddScenarioModalView(isPresented: $isPresentingAddModal, newTitle: $newTitle, newAuthor: $newAuthor,  newActorsNumber: $newActorsNumber, newContent: $newContent) {
+                        AddScenarioModalView(isPresented: $isPresentingAddModal, newTitle: $newTitle, newAuthor: $newAuthor,  newActorsNumber: $newActorsNumber, newContent: $newContent) { newScenario, publishToLibrary in
                             // Submit button action
-                            viewModel.addScenario(title: newTitle, author: newAuthor, content: newContent, actorsNumber: newActorsNumber)
+                            if publishToLibrary {
+                                viewModel.addScenario(newScenario)
+                            }
+                            let scenario = newScenario.buildScenario()
+                            $scenarios.append(scenario)
+
                             addFromSource = nil
                         }
                     }
-                }.presentationDragIndicator(.visible)
+                }
+                .presentationDragIndicator(.visible)
+               
+            }
+            .overlay {
+                if scenarios.isEmpty {
+                    ContentUnavailableView(label: {
+                        Label("No Scenarios", systemImage: "book.pages")
+                    },
+                    description: {
+                        Text("Try to upload or add scenario from *.txt file")
+                    },
+                    actions: {
+                        Button("Add Scenario") { addNewScenario = true }
+                    }).offset(y: -60)
+                }
             }
         }
     }
     
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            for index in offsets {
-                modelContext.delete(scenarios[index])
-            }
+            $scenarios.remove(atOffsets: offsets)
         }
     }
 }
 
 #Preview {
     ScenariosView()
-        .modelContainer(for: Scenario.self)
+
 }

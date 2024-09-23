@@ -14,7 +14,9 @@ struct AddScenarioModalView: View {
     @Binding var newAuthor: String
     @Binding var newActorsNumber: Int
     @Binding var newContent: String
-    var onSubmit: () -> Void
+    
+    @State private var publishToLibrary = true
+    var onSubmit: (ScenarioRemote, Bool) -> Void
     
     var body: some View {
         NavigationView {
@@ -29,37 +31,19 @@ struct AddScenarioModalView: View {
                         }
                         
                         FilePickerView(content: $newContent)
+                        Toggle("Publish to Library", isOn: $publishToLibrary)
                     }
                 }
                 .navigationTitle("Add Scenario")
                 .navigationBarItems(leading: Button("Cancel") {
                     isPresented = false
                 }, trailing: Button("Submit") {
-                    onSubmit()
+                    onSubmit(
+                        ScenarioRemote(title: newTitle, content: newContent, author: newAuthor, actorsNumber: newActorsNumber),
+                        publishToLibrary
+                    )
                 })
             }
-            .frame(height: UIScreen.main.bounds.height * 0.75) // 3/4 of the screen height
         }
     }
 }
-
-struct FilePickerView: View {
-    @Binding var content: String
-    @State private var isDocumentPickerPresented = false
-    
-    var body: some View {
-        Button("Select .txt File") {
-            isDocumentPickerPresented = true
-        }
-        .sheet(isPresented: $isDocumentPickerPresented) {
-            DocumentPicker(content: $content)
-        }
-        
-        if !content.isEmpty {
-            Text("Content loaded successfully.")
-                .font(.footnote)
-                .foregroundColor(.green)
-        }
-    }
-}
-

@@ -30,5 +30,26 @@ struct ScenarioRemote: Codable, Hashable {
     var uniqID: String? {
         id?.id.string
     }
+    
+    func buildScenario() -> Scenario {
+        var position = 0
+        let newScenario = Scenario()
+        newScenario.title = self.title
+        newScenario.releaseDate = Date()
+        newScenario.source = "remote"
+        newScenario.author = self.author ?? ""
+//        newScenario.roles
+        print("Start to build new scenario")
+        let speeches = self.content.split(separator: "\n").map {
+            position += 1
+            let speech = Speech()
+            speech.content = String($0)
+            speech.position = position
+            return speech
+        }
+        newScenario.speeches.append(objectsIn: speeches)
+        print("New scenario")
+        return newScenario
+    }
 }
 

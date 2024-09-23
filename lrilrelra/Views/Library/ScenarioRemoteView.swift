@@ -6,18 +6,21 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct ScenarioRemoteView: View {
-    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
+    
     @ObservedObject var viewModel: LibraryViewModel
+    
     var scenario: ScenarioRemote
-    var canDelete = false
+    var canDelete = true
     var body: some View {
         VStack(alignment: .leading) {
             List {
                 ForEach(scenario.content.split(separator: "\n"), id: \.self) { line in
                     Text(line).listRowSeparator(.hidden,  edges: [.bottom])
-                         // Add vertical padding between lines
+                    // Add vertical padding between lines
                 }
             }.listStyle(PlainListStyle())
             
@@ -34,22 +37,35 @@ struct ScenarioRemoteView: View {
                     }
                 }
             }
-        }).toolbar(.hidden, for: .tabBar)
-
+        })
+        
     }
     
     private func addItem() {
-        var position = 0
-        let speeches: [Speech] = scenario.content.split(separator: "\n").map {
-            position += 1
-            
-            return Speech(content: String($0), position: position)
+        let newScenario = scenario.buildScenario()
+        let realm = try! Realm()
+        
+        // Save to Realm
+        do {
+            try realm.write {
+                realm.add(newScenario)
+            }
+        } catch {
+            print("Failed to save scenario: \(error.localizedDescription)")
         }
-        let newItem = Scenario(title: scenario.title, timestamp: Date(), plot: "", author: scenario.author, roles: "A, B", speeches: speeches)
-            modelContext.insert(newItem)
-    
+        ////        modelContext.autosaveEnabled = false
+        ////        modelContext.undoManager = nil
+        //        modelContext.insert(scn)
+        //        Task.detached(priority: .background) {
+        //            speeches.forEach{
+        //                scn.speeches.append($0)
+        //            }
+        //        }
+        
+        
+        //        modelContext.autosaveEnabled = true
+        dismiss()
     }
-
 }
 
 #Preview {
