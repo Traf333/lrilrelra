@@ -5,58 +5,66 @@
 //  Created by Igor Trofimov on 09.08.2024.
 //
 
-import SwiftUI
 import RealmSwift
+import SwiftUI
 
 struct ScenarioDetailsView: View {
-    @AppStorage("lastSpeechId") private var lastSpeechId: Int?
     @ObservedRealmObject var scenario: Scenario
     
     @State var selectedRole: Role? = nil
     @State var current: [Speech] = []
+    @State var showingList: Bool = false
+    @State var selectedSpeech: Speech? = nil
     
-    
-    // Timer to periodically save the first visible speech ID
-    let saveInterval = 10.0 // Time interval in seconds
-    @State private var timer: Timer? = nil
-    
+    var bookmarks: [Speech] { scenario.speeches.filter { scenario.bookmarkIds.contains($0._id) } }
     var body: some View {
+        
         VStack(alignment: .leading) {
             ScrollViewReader { proxy in
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0) {
                         ForEach(scenario.speeches) { speech in
-                            SpeechRowView(speech: speech, onRoleSelect: selectRole, onDelete: {  deleteSpeech(speech: speech) })
-                                .id(speech.id)
-                                .opacity(getOpacity(speech.content))
-                                .onAppear {
-                                    current.append(speech)
-                                    print(">> added \(speech.id)")
-                                }
-                                .onDisappear {
-                                    current.removeAll { $0.id == speech.id }
-                                    print("<< removed \(speech.id)")
-                                }
+                            SpeechRowView(
+                                speech: speech,
+                                inBookmarks: scenario.bookmarkIds.contains(speech._id),
+                                selected: speech == selectedSpeech,
+                                onRoleSelect: selectRole,
+                                onDelete: { deleteSpeech(speech: speech) },
+                                toggleBookmark: { toggleBookmark(speech: speech) }
+                            )
+                            .id(speech.position)
+                            .opacity(getOpacity(speech.content))
+                            .onTapGesture {
+                                selectedSpeech = speech == selectedSpeech ? nil : speech
+                            }
                         }
                     }
-                    .padding(.horizontal)
-                }
-                //                .onAppear {
-                ////                     Restore scroll to the last saved speech ID
-                //                    if let lastSpeechId = lastSpeechId {
-                //                        print("Restoring scroll to speech with ID: \(lastSpeechId)")
-                //                        proxy.scrollTo(lastSpeechId, anchor: .top)
-                //                    } else {
-                //                        print("No saved speech ID found.")
-                //                    }
-                //
-                //                    // Start the timer when the view appears
-                //                    startTimer()
-                //                }
-                //                .onDisappear {
-                //                    // Stop the timer when the view disappears
-                //                    stopTimer()
-                //                }
+                    
+                }.sheet(isPresented: $showingList) {
+                    List {
+                        ForEach(bookmarks) { speech in
+                            Button(action: {
+                                proxy.scrollTo(speech.position, anchor: .top)
+                                
+                                showingList.toggle()
+                            }) {
+                                Text(speech.content.count > 40 ? speech.content.prefix(40) + "..." : speech.content)
+                                    .foregroundColor(.primary)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            .layoutPriority(1)
+                        }
+                    }
+                    .presentationDetents([.large])
+                    .presentationDragIndicator(.visible)
+                }.overlay(alignment: .bottomLeading, content: {
+                    if selectedSpeech != nil {
+                        PlayerView(scenarioId: scenario._id, speechId: selectedSpeech!._id)
+//                        Text("HEy")
+                    }
+
+                })
             }
         }
         .toolbar {
@@ -66,41 +74,25 @@ struct ScenarioDetailsView: View {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: ScenarioEditView(scenario: scenario)) {
-                    Image(systemName: "square.and.pencil")
+                Button(action: {
+                    withAnimation {
+                        showingList.toggle()
+                    }
+                }) {
+                    Image(systemName: "list.bullet")
                 }
             }
         }
         .navigationTitle(scenario.title)
-        
-    }
-    
-    // Function to start the timer
-    private func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: saveInterval, repeats: true) { _ in
-            saveFirstVisibleSpeech()
-        }
-    }
-    
-    // Function to stop the timer
-    private func stopTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
-    // Function to save the first visible speech
-    private func saveFirstVisibleSpeech() {
-        if let firstVisibleSpeech = current.first {
-            print("Saving first visible speech ID: \(firstVisibleSpeech.id)")
-            lastSpeechId = Int(firstVisibleSpeech.id)
-        } else {
-            print("No visible speech to save.")
-        }
     }
     
     private func getOpacity(_ content: String) -> Double {
         if let selectedRole = selectedRole {
-            let allNames = [selectedRole.name] + selectedRole.aliases.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            let allNames =
+            [selectedRole.name]
+            + selectedRole.aliases.split(separator: ",").map {
+                $0.trimmingCharacters(in: .whitespacesAndNewlines)
+            }
             
             if allNames.contains(where: { name in content.hasPrefix(name) }) {
                 return 1
@@ -122,7 +114,9 @@ struct ScenarioDetailsView: View {
             }
             
             // Split the role's aliases into an array by comma and check each alias
-            let aliasesArray = role.aliases.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            let aliasesArray = role.aliases.split(separator: ",").map {
+                $0.trimmingCharacters(in: .whitespacesAndNewlines)
+            }
             
             for alias in aliasesArray {
                 if content.starts(with: alias) {
@@ -142,26 +136,34 @@ struct ScenarioDetailsView: View {
                 let realm = try! Realm()
                 
                 try realm.write {
-                    // Remove the speech from the list
-                    print("start")
-                    // Optionally, delete the speech object from the Realm entirely
                     $scenario.speeches.remove(at: index)
-                    print("mid")
-                    
-                    print("end")
                 }
             }
         } catch let error {
             print(error.localizedDescription)
         }
     }
+    
+    private func toggleBookmark(speech: Speech) {
+        do {
+            let realm = try! Realm()
+            
+            try realm.write {
+                if scenario.bookmarkIds.contains(speech._id) {
+                    $scenario.bookmarkIds.remove(at: scenario.bookmarkIds.index(of: speech._id)!)
+                } else {
+                    $scenario.bookmarkIds.append(speech._id)
+                }
+            }
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
 }
-
 
 #Preview {
     NavigationStack {
         ScenarioDetailsView(scenario: Scenario.example())
     }
 }
-
-

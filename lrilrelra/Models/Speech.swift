@@ -14,20 +14,25 @@ class Speech: Object, ObjectKeyIdentifiable {
     @Persisted var position: Int = 0
 }
 
-//
-//struct SpeechMock {
-//    static func instance() -> Speech {
-//        let container = try! ModelContainer(for: Schema([Scenario.self, Speech.self])) // Use inMemory storage for previews
-//        
-//        // Add a sample scenario to the in-memory container for preview
-//        let context = ModelContext(container)
-//        
-//        
-//        // Fetch the first scenario from the context for preview
-//        if let firstScenario = try? context.fetch(FetchDescriptor<Speech>()).first {
-//          return firstScenario
-//        } else {
-//            return Speech(content: "some cpontent", position: 1 )
-//        }
-//    }
-//}
+
+extension Speech {
+    static func examples(n: Int) -> [Speech] {
+        guard let filePath = Bundle.main.path(forResource: "zov", ofType: "txt"),
+              let fileContent = try? String(contentsOfFile: filePath) else {
+            print("Error: Unable to read zov.txt")
+            return []
+        }
+        
+        let lines = fileContent.components(separatedBy: .newlines).filter { !$0.isEmpty }
+        
+        var speeches: [Speech] = []
+        
+        for i in 1...n {
+            let content = lines[i]
+            speeches.append(Speech(value: ["content": content, "position": i]))
+        }
+        
+        return speeches
+    }
+}
+

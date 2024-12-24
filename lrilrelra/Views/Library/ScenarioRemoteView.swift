@@ -53,17 +53,7 @@ struct ScenarioRemoteView: View {
         } catch {
             print("Failed to save scenario: \(error.localizedDescription)")
         }
-        ////        modelContext.autosaveEnabled = false
-        ////        modelContext.undoManager = nil
-        //        modelContext.insert(scn)
-        //        Task.detached(priority: .background) {
-        //            speeches.forEach{
-        //                scn.speeches.append($0)
-        //            }
-        //        }
-        
-        
-        //        modelContext.autosaveEnabled = true
+
         dismiss()
     }
 }

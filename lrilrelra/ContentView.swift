@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @ObserveInjection var inject
     var body: some View {
-        ScenariosView()
+        ScenariosView().enableInjection()
     }
 }
 
