@@ -30,35 +30,38 @@ struct ScenariosView: View {
 
   var body: some View {
     NavigationStack {
-        List {
-            ForEach(scenarios) { item in
-                NavigationLink {
-                    ScenarioDetailsView(scenario: item)
-                } label: {
-                    VStack(
-                        alignment: .leading,
-                        content: {
-                            Text(item.title).font(.headline)
-                            if !item.author.isEmpty {
-                                Text(item.author).font(.subheadline).foregroundStyle(.secondary)
-                            }
-                            HStack {
-                                Text(item.releaseDate, format: Date.FormatStyle(date: .numeric))
-                                
-                                if item.roles.count > 0 {
-                                    HStack {
-                                        Text("\(item.roles.count)")
-                                        Image(systemName: "person.2.fill")
-                                    }
-                                }
-                                
-                            }.font(.caption).foregroundColor(.gray)
-                        }
-                    ).padding(.vertical, 4)
+      List {
+        ForEach(scenarios) { item in
+          NavigationLink {
+            ScenarioDetailsView(scenario: item)
+          } label: {
+            VStack(
+              alignment: .leading,
+              content: {
+                Text(item.title).font(.headline)
+                if !item.author.isEmpty {
+                  Text(item.author).font(.subheadline).foregroundStyle(.secondary)
                 }
-            }
-            .onDelete(perform: deleteItems)
+                HStack {
+                  Text(item.releaseDate, format: Date.FormatStyle(date: .numeric))
+
+                  if item.roles.count > 0 {
+                    HStack {
+                      Text("\(item.roles.count)")
+                      Image(systemName: "person.2.fill")
+                    }
+                  }
+
+                }.font(.caption).foregroundColor(.gray)
+              }
+            ).padding(.vertical, 4)
+          }
         }
+        .onDelete(perform: deleteItems)
+        Button(action: { addNewScenario = true }) {
+          Label("Add Scenario", systemImage: "folder.badge.plus")
+        }
+      }
       .toolbar {
         if !scenarios.isEmpty {
           ToolbarItem(placement: .navigationBarTrailing) {
