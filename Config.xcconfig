@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  lrilrelra
+//
+//  Created by Igor Trofimov on 01.01.2025.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+REALM_STORAGE_URL="https://lrilrelra-api.shuttleapp.rs"
+REMOTE_LIBRARY_URL="https://lrilrelra-api.shuttleapp.rs/scenarios"

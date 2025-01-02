@@ -21,6 +21,8 @@
 		FB5D7DA72C88749800CF585B /* FilePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D7DA62C88749800CF585B /* FilePickerView.swift */; };
 		FB5D7DA92C8C4D3700CF585B /* SpeechRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D7DA82C8C4D3700CF585B /* SpeechRowView.swift */; };
 		FB5D7DAD2C8EEFF600CF585B /* ScenarioEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D7DAC2C8EEFF600CF585B /* ScenarioEditView.swift */; };
+		FB5D89C92D254D1A00F4185E /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = FB5D89C82D254D1A00F4185E /* Config.xcconfig */; };
+		FB5D89CB2D254FAC00F4185E /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D89CA2D254FAC00F4185E /* Configuration.swift */; };
 		FBD888F82C6606BE00BD9D73 /* Lrilrelra.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD888F72C6606BE00BD9D73 /* Lrilrelra.swift */; };
 		FBD888FA2C6606BE00BD9D73 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD888F92C6606BE00BD9D73 /* ContentView.swift */; };
 		FBD888FC2C6606BE00BD9D73 /* Scenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD888FB2C6606BE00BD9D73 /* Scenario.swift */; };
@@ -91,6 +93,8 @@
 		FB5D7DA62C88749800CF585B /* FilePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerView.swift; sourceTree = "<group>"; };
 		FB5D7DA82C8C4D3700CF585B /* SpeechRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRowView.swift; sourceTree = "<group>"; };
 		FB5D7DAC2C8EEFF600CF585B /* ScenarioEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioEditView.swift; sourceTree = "<group>"; };
+		FB5D89C82D254D1A00F4185E /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		FB5D89CA2D254FAC00F4185E /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		FBD888F42C6606BE00BD9D73 /* lrilrelra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lrilrelra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBD888F72C6606BE00BD9D73 /* Lrilrelra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lrilrelra.swift; sourceTree = "<group>"; };
 		FBD888F92C6606BE00BD9D73 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 		FB0EB0CF2C6B537400E5A859 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				FB5D89CA2D254FAC00F4185E /* Configuration.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 		FBD888EB2C6606BE00BD9D73 = {
 			isa = PBXGroup;
 			children = (
+				FB5D89C82D254D1A00F4185E /* Config.xcconfig */,
 				FBEF3BED2C874CDD00D1886F /* Launch Screen.storyboard */,
 				FBD888F62C6606BE00BD9D73 /* lrilrelra */,
 				FBD889092C6606BF00BD9D73 /* lrilrelraTests */,
@@ -436,6 +442,7 @@
 				FBEF3BE92C874C4100D1886F /* Repka drawing for kids pencil.png in Resources */,
 				FB0EB0E02C6CBB1900E5A859 /* zov.txt in Resources */,
 				FBEF3BE62C874C4100D1886F /* Repka drawing for kids.jpg in Resources */,
+				FB5D89C92D254D1A00F4185E /* Config.xcconfig in Resources */,
 				FBEF3BEB2C874C4100D1886F /* Repka drawing pencil kids.jpg in Resources */,
 				FBEF3BE82C874C4100D1886F /* Repka drawing pencil kids (1).jpg in Resources */,
 				FBEF3BEE2C874CDD00D1886F /* Launch Screen.storyboard in Resources */,
@@ -476,6 +483,7 @@
 				FB0EB0D22C6B562F00E5A859 /* LibraryViewModel.swift in Sources */,
 				FBD888FC2C6606BE00BD9D73 /* Scenario.swift in Sources */,
 				FB0B87F42D1AF4AD00AEEC14 /* Audio.swift in Sources */,
+				FB5D89CB2D254FAC00F4185E /* Configuration.swift in Sources */,
 				FB0B87F22D181A2200AEEC14 /* PlayerView.swift in Sources */,
 				FB2060762C95E4100070E5EA /* SpeechEditView.swift in Sources */,
 				FBD8892F2C6629D500BD9D73 /* Speech.swift in Sources */,
@@ -525,6 +533,7 @@
 /* Begin XCBuildConfiguration section */
 		FBD889182C6606BF00BD9D73 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB5D89C82D254D1A00F4185E /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -644,6 +653,7 @@
 		};
 		FBD8891B2C6606BF00BD9D73 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB5D89C82D254D1A00F4185E /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -654,6 +664,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = lrilrelra/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need microphone access to record speeches for scenarios";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
@@ -678,6 +689,7 @@
 		};
 		FBD8891C2C6606BF00BD9D73 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB5D89C82D254D1A00F4185E /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -688,6 +700,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = lrilrelra/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need microphone access to record speeches for scenarios";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";

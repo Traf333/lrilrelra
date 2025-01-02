@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @ObserveInjection var inject
     var body: some View {
+        Text("Hello, World!").padding()
         ScenariosView().enableInjection()
     }
 }

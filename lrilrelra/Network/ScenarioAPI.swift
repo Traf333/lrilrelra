@@ -10,12 +10,8 @@ import Foundation
 class ScenarioAPI {
     static let shared = ScenarioAPI()
     
-    private let baseURL = "https://lrilrelra-api.shuttleapp.rs/scenarios"
-    
     func fetchScenarios(completion: @escaping ([ScenarioRemote]?) -> Void) {
-        guard let url = URL(string: baseURL) else { return }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: API.remoteLibraryURL) { data, response, error in
             guard let data = data, error == nil else {
                 print("error")
                 completion(nil)
@@ -31,9 +27,7 @@ class ScenarioAPI {
     }
     
     func createScenario(scenario: ScenarioRemote, completion: @escaping (ScenarioRemote?) -> Void) {
-        guard let url = URL(string: baseURL) else { return }
-        
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: API.remoteLibraryURL)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try? JSONEncoder().encode(scenario)
@@ -53,7 +47,7 @@ class ScenarioAPI {
     }
     
     func deleteScenario(id: String, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "\(baseURL)/\(id)") else { return }
+        guard let url = URL(string: id, relativeTo: API.remoteLibraryURL) else { return }
         print("deleting URL: \(url)")
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"

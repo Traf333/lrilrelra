@@ -63,31 +63,27 @@ struct ScenarioDetailsView: View {
           }
           .presentationDetents([.large])
           .presentationDragIndicator(.visible)
-        }.overlay(
-          alignment: .bottomLeading,
-          content: {
-            if selectedSpeech != nil {
-              PlayerView(scenarioId: scenario._id, speechId: selectedSpeech!._id)
-              //                        Text("HEy")
-            }
-
-          })
+        }
       }
     }
     .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
+        if let speech = selectedSpeech {
+            ToolbarItemGroup(placement: .bottomBar) {
+              PlayerView(scenarioId: scenario._id, speechId: speech._id)
+            }
+        }
+        
+      ToolbarItemGroup(placement: .navigationBarTrailing) {
         NavigationLink(destination: ScenarioEditView(scenario: scenario)) {
           Image(systemName: "square.and.pencil")
         }
-      }
-      ToolbarItem(placement: .navigationBarTrailing) {
-        Button(action: {
-          withAnimation {
-            showingList.toggle()
+          Button(action: {
+            withAnimation {
+              showingList.toggle()
+            }
+          }) {
+            Image(systemName: "list.bullet")
           }
-        }) {
-          Image(systemName: "list.bullet")
-        }
       }
     }
     .navigationTitle(scenario.title)

@@ -17,61 +17,31 @@ struct PlayerView: View {
   }
 
   var body: some View {
+
     HStack {
-
-      // Display playback controls and recording button
-      Spacer()
-
-      // Back Button
-      Button(action: {
-        // Handle back action
-      }) {
-        Image(systemName: "backward.fill")
-          .frame(width: 50, height: 50)
-          .background(Circle().fill(Color.gray.opacity(viewModel.isRecording ? 0.2 : 0.5)))
+      ControlGroup {
+        Button("Back", systemImage: "backward.fill", action: { /* Action for back */  })
+        Button(
+          "Play/Pause", systemImage: viewModel.isPlaying ? "pause.fill" : "play.fill",
+          action: {
+            viewModel.isPlaying ? viewModel.pause() : viewModel.play()
+          })
+        Button("Forward", systemImage: "forward.fill", action: { /* Action for forward */  })
       }
-      .disabled(viewModel.isRecording)
-
       Spacer()
+      // Right side buttons
+      ControlGroup {
 
-      // Play/Pause Button
-      Button(action: {
-        viewModel.isPlaying ? viewModel.pause() : viewModel.play()
-      }) {
-        Image(systemName: viewModel.isPlaying ? "pause.fill" : "play.fill")
-          .frame(width: 50, height: 50)
-          .background(Circle().fill(Color.gray.opacity(viewModel.isRecording ? 0.2 : 0.5)))
+        Button(
+          "Play/Pause", systemImage: viewModel.isRecording ? "stop.fill" : "mic.fill",
+          action: {
+            viewModel.isRecording ? viewModel.stopRecording() : viewModel.startRecording()
+          }
+        )
+        
+        Button("Save", systemImage: "tray.and.arrow.down.fill", action: { /* Save action */  })
       }
-      .disabled(viewModel.isRecording)
-
-      Spacer()
-
-      // Forward Button
-      Button(action: {
-        // Handle forward action
-      }) {
-        Image(systemName: "forward.fill")
-          .frame(width: 50, height: 50)
-          .background(Circle().fill(Color.gray.opacity(viewModel.isRecording ? 0.2 : 0.5)))
-      }
-      .disabled(viewModel.isRecording)
-
-      Spacer()
-
-      // Record Button
-      Button(action: {
-        viewModel.isRecording ? viewModel.stopRecording() : viewModel.startRecording()
-      }) {
-        Image(systemName: viewModel.isRecording ? "stop.circle.fill" : "mic.fill")
-          .frame(width: 40, height: 40)
-          .background(Circle().fill(Color.red.opacity(0.2)))
-          .symbolEffect(.breathe, options: .repeating, isActive: viewModel.isRecording)
-      }
-
-      Spacer()
-    }.padding()
-      .background(Color(UIColor.systemBackground).opacity(0.95))
-      .shadow(radius: 10)
+    }
   }
 }
 
