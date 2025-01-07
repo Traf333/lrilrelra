@@ -6,33 +6,33 @@
 //
 
 import Foundation
-import RealmSwift
+//import RealmSwift
 
-class Speech: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true) var _id: ObjectId
-    @Persisted var content: String = ""
-    @Persisted var position: Int = 0
+class Speech: Codable {
+//    @Persisted(primaryKey: true) var _id: ObjectId
+//    @Persisted var content: String = ""
+//    @Persisted var position: Int = 0
 }
 
 
 extension Speech {
-    static func examples(n: Int) -> [Speech] {
-        guard let filePath = Bundle.main.path(forResource: "zov", ofType: "txt"),
-              let fileContent = try? String(contentsOfFile: filePath) else {
-            print("Error: Unable to read zov.txt")
-            return []
-        }
-        
-        let lines = fileContent.components(separatedBy: .newlines).filter { !$0.isEmpty }
-        
-        var speeches: [Speech] = []
-        
-        for i in 1...n {
-            let content = lines[i]
-            speeches.append(Speech(value: ["content": content, "position": i]))
-        }
-        
-        return speeches
-    }
+//    static func examples(n: Int) -> [Speech] {
+//        guard let filePath = Bundle.main.path(forResource: "zov", ofType: "txt"),
+//              let fileContent = try? String(contentsOfFile: filePath) else {
+//            print("Error: Unable to read zov.txt")
+//            return []
+//        }
+//        
+//        let lines = fileContent.components(separatedBy: .newlines).filter { !$0.isEmpty }
+//        
+//        var speeches: [Speech] = []
+//        
+//        for i in 1...n {
+//            let content = lines[i]
+//            speeches.append(Speech(value: ["content": content, "position": i]))
+//        }
+//        
+//        return speeches
+//    }
 }
 

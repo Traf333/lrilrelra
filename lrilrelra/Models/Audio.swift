@@ -6,12 +6,12 @@
 //
 
 import Foundation
-import RealmSwift
+//import RealmSwift
 
-class Audio: Object, ObjectKeyIdentifiable {
-  @Persisted(primaryKey: true) var _id: ObjectId
-  @Persisted var scenarioId: ObjectId
-  @Persisted var speechId: ObjectId
-  @Persisted var audioData: Data
-  @Persisted var uploadedAt: Date
+class Audio: Codable {
+//  @Persisted(primaryKey: true) var _id: ObjectId
+//  @Persisted var scenarioId: ObjectId
+//  @Persisted var speechId: ObjectId
+//  @Persisted var audioData: Data
+//  @Persisted var uploadedAt: Date
 }

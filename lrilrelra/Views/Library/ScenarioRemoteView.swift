@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import RealmSwift
 
 struct ScenarioRemoteView: View {
     @Environment(\.dismiss) private var dismiss
@@ -28,34 +27,34 @@ struct ScenarioRemoteView: View {
         .navigationTitle(scenario.title)
         .navigationBarItems(trailing: HStack {
             Button("Save", systemImage: "square.and.arrow.down.on.square") {
-                addItem()
+//                addItem()
             }
             if canDelete {
                 Button("Delete", systemImage: "trash") {
-                    if let id = scenario.uniqID {
-                        viewModel.deleteScenario(id: id)
-                    }
+//                    if let id = scenario.uniqID {
+//                        viewModel.deleteScenario(id: id)
+//                    }
                 }
             }
         })
         
     }
     
-    private func addItem() {
-        let newScenario = scenario.buildScenario()
-        let realm = try! Realm()
-        
-        // Save to Realm
-        do {
-            try realm.write {
-                realm.add(newScenario)
-            }
-        } catch {
-            print("Failed to save scenario: \(error.localizedDescription)")
-        }
-
-        dismiss()
-    }
+//    private func addItem() {
+//        let newScenario = scenario.buildScenario()
+//        let realm = try! Realm()
+//        
+//        // Save to Realm
+//        do {
+//            try realm.write {
+//                realm.add(newScenario)
+//            }
+//        } catch {
+//            print("Failed to save scenario: \(error.localizedDescription)")
+//        }
+//
+//        dismiss()
+//    }
 }
 
 #Preview {

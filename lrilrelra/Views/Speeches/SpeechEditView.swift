@@ -1,34 +1,34 @@
+////
+////  SpeechEditView.swift
+////  lrilrelra
+////
+////  Created by Igor Trofimov on 14.09.2024.
+////
 //
-//  SpeechEditView.swift
-//  lrilrelra
+//import SwiftUI
+//import RealmSwift
 //
-//  Created by Igor Trofimov on 14.09.2024.
-//
-
-import SwiftUI
-import RealmSwift
-
-struct SpeechEditView: View {
-    @Environment(\.dismiss) var dismiss
-    @ObservedRealmObject var speech: Speech
-    
-    var body: some View {
-        Form {
-            Section(header: Text("Edit Speech")) {
-                TextEditor(text: $speech.content)
-                    .frame(height: 200)  // Set the height for a text area-like behavior
-                                       .padding(.horizontal, 4)
-            }
-            
-    
-        }
-        .navigationTitle("Edit Speech")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Save") {
-                    dismiss()
-                }
-            }
-        }
-    }
-}
+//struct SpeechEditView: View {
+//    @Environment(\.dismiss) var dismiss
+//    @ObservedRealmObject var speech: Speech
+//    
+//    var body: some View {
+//        Form {
+//            Section(header: Text("Edit Speech")) {
+//                TextEditor(text: $speech.content)
+//                    .frame(height: 200)  // Set the height for a text area-like behavior
+//                                       .padding(.horizontal, 4)
+//            }
+//            
+//    
+//        }
+//        .navigationTitle("Edit Speech")
+//        .toolbar {
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                Button("Save") {
+//                    dismiss()
+//                }
+//            }
+//        }
+//    }
+//}

@@ -9,3 +9,5 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 REALM_STORAGE_URL="https://lrilrelra-api.shuttleapp.rs"
 REMOTE_LIBRARY_URL="https://lrilrelra-api.shuttleapp.rs/scenarios"
+DITTO_APP_ID="ef958315-0515-4b53-946b-0d55aedb9e57"
+DITTO_TOKEN="560daa69-8c8c-475c-a888-74fa8aadb314"
