@@ -17,6 +17,7 @@
 		FB0EB0DC2C6CB86300E5A859 /* AddScenarioModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EB0DB2C6CB86300E5A859 /* AddScenarioModalView.swift */; };
 		FB0EB0E02C6CBB1900E5A859 /* zov.txt in Resources */ = {isa = PBXBuildFile; fileRef = FB0EB0DF2C6CBB1900E5A859 /* zov.txt */; };
 		FB2060762C95E4100070E5EA /* SpeechEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2060752C95E4100070E5EA /* SpeechEditView.swift */; };
+		FB2920862D3286460081E13B /* ScenariosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2920852D3286460081E13B /* ScenariosViewModel.swift */; };
 		FB4014612D049F19002DD282 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = FB4014602D049F19002DD282 /* Inject */; };
 		FB5D7DA72C88749800CF585B /* FilePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D7DA62C88749800CF585B /* FilePickerView.swift */; };
 		FB5D7DA92C8C4D3700CF585B /* SpeechRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D7DA82C8C4D3700CF585B /* SpeechRowView.swift */; };
@@ -93,6 +94,7 @@
 		FB0EB0DB2C6CB86300E5A859 /* AddScenarioModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScenarioModalView.swift; sourceTree = "<group>"; };
 		FB0EB0DF2C6CBB1900E5A859 /* zov.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = zov.txt; sourceTree = "<group>"; };
 		FB2060752C95E4100070E5EA /* SpeechEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEditView.swift; sourceTree = "<group>"; };
+		FB2920852D3286460081E13B /* ScenariosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenariosViewModel.swift; sourceTree = "<group>"; };
 		FB5D7DA62C88749800CF585B /* FilePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerView.swift; sourceTree = "<group>"; };
 		FB5D7DA82C8C4D3700CF585B /* SpeechRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRowView.swift; sourceTree = "<group>"; };
 		FB5D7DAC2C8EEFF600CF585B /* ScenarioEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioEditView.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			children = (
 				FB0EB0D12C6B562F00E5A859 /* LibraryViewModel.swift */,
 				FB0B87F52D1B3BBD00AEEC14 /* PlayerViewModel.swift */,
+				FB2920852D3286460081E13B /* ScenariosViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				FB0EB0D62C6B5A3B00E5A859 /* ScenarioRemote.swift in Sources */,
 				FB0EB0D42C6B56AE00E5A859 /* ScenarioAPI.swift in Sources */,
 				FBD889332C66407000BD9D73 /* ScenarioDetailsView.swift in Sources */,
+				FB2920862D3286460081E13B /* ScenariosViewModel.swift in Sources */,
 				FB0EB0DC2C6CB86300E5A859 /* AddScenarioModalView.swift in Sources */,
 				FBD8892A2C66264800BD9D73 /* LibraryView.swift in Sources */,
 				FBD888F82C6606BE00BD9D73 /* Lrilrelra.swift in Sources */,

@@ -4,51 +4,60 @@
 //
 //  Created by Igor Trofimov on 09.08.2024.
 //
-
+import DittoSwift
 import Foundation
 
-
-class Role: Codable {
-//    @Persisted(primaryKey: true) var _id: ObjectId
-//    @Persisted var name: String
-//    @Persisted var aliases: String
+struct Scenario: Identifiable, Hashable, Equatable {
+  var id: String
+  var title: String
+  var author: String
+  var createdAt: Date
+  var releaseDate: Date?
+  var source: String?
+  var createdBy: String?
 }
 
+extension Scenario {
+  init(
+    id: String,
+    title: String,
+    author: String,
+    createdAt: Date? = nil,
+    releaseDate: Date? = nil,
+    source: String? = nil,
+    createdBy: String? = nil
+  ) {
+    self.id = id
+    self.title = title
+    self.author = author
+    self.createdAt = createdAt ?? Date()
+    self.releaseDate = releaseDate
+    self.source = source
+    self.createdBy = createdBy
+  }
+}
 
-class Scenario: Identifiable {
-    var title: String
-    var id: String
-    init(title: String) {
-        self.title = title
-        self.id = UUID().uuidString
-    }
-//    @Persisted(primaryKey: true) var _id: ObjectId
-//    @Persisted var title: String
-//    @Persisted var author: String
-//    @Persisted var releaseDate: Date
-//    @Persisted var source: String?
-//    
-//    @Persisted var roles = RealmSwift.List<Role>()
-//    @Persisted var speeches = RealmSwift.List<Speech>()
-//    @Persisted var bookmarkIds = RealmSwift.List<ObjectId>()
-    
-//    static func example() -> Scenario {
-//        let scenario = Scenario()
-//        scenario.title = "Sample Scenario"
-//        scenario.author = "Sample Author"
-//
-//        let role1 = Role()
-//        role1.name = "Role 1"
-//        role1.aliases = "Alias 1"
-//
-//        let role2 = Role()
-//        role2.name = "Role 2"
-//        role2.aliases = "Alias 2"
-//
-//        scenario.roles.append(objectsIn: [role1, role2])
-//        scenario.speeches.append(objectsIn: Speech.examples(n: 200))
-//
-//
-//        return scenario
-//    }
+extension Scenario {
+  func docDictionary() -> [String: Any?] {
+    [
+      "title": title,
+      "author": author,
+      "createdAt": createdAt,
+      "releaseDate": releaseDate,
+      "source": source,
+      "createdBy": createdBy,
+    ]
+  }
+}
+
+extension Scenario: DittoDecodable {
+  init(value: [String: Any?]) {
+    self.id = value["_id"] as? String ?? ""
+    self.title = value["title"] as? String ?? ""
+    self.author = value["author"] as? String ?? ""
+    self.createdAt = value["createdAt"] as? Date ?? Date()
+    self.releaseDate = value["releaseDate"] as? Date
+    self.source = value["source"] as? String
+    self.createdBy = value["createdBy"] as? String
+  }
 }
