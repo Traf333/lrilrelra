@@ -7,14 +7,21 @@
 import DittoSwift
 import Foundation
 
+struct Role: Identifiable, Hashable, Equatable {
+  var id: String
+  var name: String
+  var aliases: String
+}
+
 struct Scenario: Identifiable, Hashable, Equatable {
   var id: String
   var title: String
   var author: String
+  var releaseYear: Int
   var createdAt: Date
-  var releaseDate: Date?
   var source: String?
   var createdBy: String?
+  var roles: [Role] = []
 }
 
 extension Scenario {
@@ -22,30 +29,34 @@ extension Scenario {
     id: String,
     title: String,
     author: String,
+    releaseYear: Int = 0,
     createdAt: Date? = nil,
-    releaseDate: Date? = nil,
     source: String? = nil,
-    createdBy: String? = nil
+    createdBy: String? = nil,
+    roles: [String] = []
   ) {
     self.id = id
     self.title = title
     self.author = author
     self.createdAt = createdAt ?? Date()
-    self.releaseDate = releaseDate
+    self.releaseYear = releaseYear
     self.source = source
     self.createdBy = createdBy
+    self.roles = roles.map { Role(id: UUID().uuidString, name: $0, aliases: "") }
   }
 }
 
 extension Scenario {
   func docDictionary() -> [String: Any?] {
     [
+      "_id": id,
       "title": title,
       "author": author,
-      "createdAt": createdAt,
-      "releaseDate": releaseDate,
+      "createdAt": createdAt.description,
+      "releaseYear": releaseYear,
       "source": source,
       "createdBy": createdBy,
+      "roles": roles,
     ]
   }
 }
@@ -56,8 +67,24 @@ extension Scenario: DittoDecodable {
     self.title = value["title"] as? String ?? ""
     self.author = value["author"] as? String ?? ""
     self.createdAt = value["createdAt"] as? Date ?? Date()
-    self.releaseDate = value["releaseDate"] as? Date
+    self.releaseYear = value["releaseYear"] as? Int ?? 0
     self.source = value["source"] as? String
     self.createdBy = value["createdBy"] as? String
+    self.roles = value["roles"] as? [Role] ?? []
+  }
+}
+
+extension Scenario {
+  static func example() -> Scenario {
+    Scenario(
+      id: "id",
+      title: "title",
+      author: "author",
+      releaseYear: 2008,
+      createdAt: Date(),
+      source: "source",
+      createdBy: "createdBy",
+      roles: ["role1", "role2"]
+    )
   }
 }

@@ -6,10 +6,15 @@
 //
 
 import Foundation
-import RealmSwift
 
-class Bookmark: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true) var _id: ObjectId
-    @Persisted var speechId: ObjectId
-    @Persisted var schenarioId: ObjectId    
+struct Bookmark: Identifiable, Hashable, Equatable {
+  var id: String
+  var speechId: String
+  var scenarioId: String
+
+  init(id: String, speechId: String, scenarioId: String) {
+    self.id = id
+    self.speechId = speechId
+    self.scenarioId = scenarioId
+  }
 }

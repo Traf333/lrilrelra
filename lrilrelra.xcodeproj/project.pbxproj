@@ -28,6 +28,7 @@
 		FB5D89D02D26F55400F4185E /* DittoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FB5D89CF2D26F55400F4185E /* DittoSwift */; };
 		FB5D89D52D27E16000F4185E /* DittoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D89D42D27E16000F4185E /* DittoService.swift */; };
 		FB5D89D72D27E1CF00F4185E /* MockTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D89D62D27E1CF00F4185E /* MockTest.swift */; };
+		FBD53D3A2D4252AE000BA19E /* Inputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD53D392D4252AE000BA19E /* Inputs.swift */; };
 		FBD888F82C6606BE00BD9D73 /* Lrilrelra.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD888F72C6606BE00BD9D73 /* Lrilrelra.swift */; };
 		FBD888FA2C6606BE00BD9D73 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD888F92C6606BE00BD9D73 /* ContentView.swift */; };
 		FBD888FC2C6606BE00BD9D73 /* Scenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD888FB2C6606BE00BD9D73 /* Scenario.swift */; };
@@ -40,8 +41,7 @@
 		FBD8892A2C66264800BD9D73 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD889292C66264800BD9D73 /* LibraryView.swift */; };
 		FBD8892F2C6629D500BD9D73 /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD8892E2C6629D500BD9D73 /* Speech.swift */; };
 		FBD889332C66407000BD9D73 /* ScenarioDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD889322C66407000BD9D73 /* ScenarioDetailsView.swift */; };
-		FBE9854F2CA001EC006FB544 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FBE9854E2CA001EC006FB544 /* RealmSwift */; };
-		FBE985502CA01D6C006FB544 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = FBE9854E2CA001EC006FB544 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		FBE618BF2D3BCAA2002C671D /* ScenarioDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE618BE2D3BCAA2002C671D /* ScenarioDetailsViewModel.swift */; };
 		FBEF3BE62C874C4100D1886F /* Repka drawing for kids.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FBEF3BDF2C874C4100D1886F /* Repka drawing for kids.jpg */; };
 		FBEF3BE72C874C4100D1886F /* Repka drawing for kids.png in Resources */ = {isa = PBXBuildFile; fileRef = FBEF3BE02C874C4100D1886F /* Repka drawing for kids.png */; };
 		FBEF3BE82C874C4100D1886F /* Repka drawing pencil kids (1).jpg in Resources */ = {isa = PBXBuildFile; fileRef = FBEF3BE12C874C4100D1886F /* Repka drawing pencil kids (1).jpg */; };
@@ -76,7 +76,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FBE985502CA01D6C006FB544 /* RealmSwift in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +101,7 @@
 		FB5D89CA2D254FAC00F4185E /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		FB5D89D42D27E16000F4185E /* DittoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DittoService.swift; sourceTree = "<group>"; };
 		FB5D89D62D27E1CF00F4185E /* MockTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTest.swift; sourceTree = "<group>"; };
+		FBD53D392D4252AE000BA19E /* Inputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inputs.swift; sourceTree = "<group>"; };
 		FBD888F42C6606BE00BD9D73 /* lrilrelra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lrilrelra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBD888F72C6606BE00BD9D73 /* Lrilrelra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lrilrelra.swift; sourceTree = "<group>"; };
 		FBD888F92C6606BE00BD9D73 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -117,6 +117,7 @@
 		FBD889292C66264800BD9D73 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		FBD8892E2C6629D500BD9D73 /* Speech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speech.swift; sourceTree = "<group>"; };
 		FBD889322C66407000BD9D73 /* ScenarioDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioDetailsView.swift; sourceTree = "<group>"; };
+		FBE618BE2D3BCAA2002C671D /* ScenarioDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioDetailsViewModel.swift; sourceTree = "<group>"; };
 		FBEF3BDF2C874C4100D1886F /* Repka drawing for kids.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Repka drawing for kids.jpg"; sourceTree = "<group>"; };
 		FBEF3BE02C874C4100D1886F /* Repka drawing for kids.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Repka drawing for kids.png"; sourceTree = "<group>"; };
 		FBEF3BE12C874C4100D1886F /* Repka drawing pencil kids (1).jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Repka drawing pencil kids (1).jpg"; sourceTree = "<group>"; };
@@ -132,7 +133,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBE9854F2CA001EC006FB544 /* RealmSwift in Frameworks */,
 				FB4014612D049F19002DD282 /* Inject in Frameworks */,
 				FB5D89CE2D26F55400F4185E /* DittoObjC in Frameworks */,
 				FB5D89D02D26F55400F4185E /* DittoSwift in Frameworks */,
@@ -171,6 +171,7 @@
 				FB0EB0D12C6B562F00E5A859 /* LibraryViewModel.swift */,
 				FB0B87F52D1B3BBD00AEEC14 /* PlayerViewModel.swift */,
 				FB2920852D3286460081E13B /* ScenariosViewModel.swift */,
+				FBE618BE2D3BCAA2002C671D /* ScenarioDetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -218,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				FB5D7DA62C88749800CF585B /* FilePickerView.swift */,
+				FBD53D392D4252AE000BA19E /* Inputs.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -429,7 +431,6 @@
 			);
 			mainGroup = FBD888EB2C6606BE00BD9D73;
 			packageReferences = (
-				FBE9854D2CA001EC006FB544 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				FBB772312D049A87005FF1D5 /* XCRemoteSwiftPackageReference "Inject" */,
 				FB5D89CC2D26F55400F4185E /* XCRemoteSwiftPackageReference "DittoSwiftPackage" */,
 			);
@@ -499,6 +500,7 @@
 				FB0B87F22D181A2200AEEC14 /* PlayerView.swift in Sources */,
 				FB2060762C95E4100070E5EA /* SpeechEditView.swift in Sources */,
 				FBD8892F2C6629D500BD9D73 /* Speech.swift in Sources */,
+				FBD53D3A2D4252AE000BA19E /* Inputs.swift in Sources */,
 				FB0EB0D62C6B5A3B00E5A859 /* ScenarioRemote.swift in Sources */,
 				FB0EB0D42C6B56AE00E5A859 /* ScenarioAPI.swift in Sources */,
 				FBD889332C66407000BD9D73 /* ScenarioDetailsView.swift in Sources */,
@@ -508,6 +510,7 @@
 				FBD888F82C6606BE00BD9D73 /* Lrilrelra.swift in Sources */,
 				FB5D89D72D27E1CF00F4185E /* MockTest.swift in Sources */,
 				FB0EB0D82C6CB1EA00E5A859 /* ScenarioRemoteView.swift in Sources */,
+				FBE618BF2D3BCAA2002C671D /* ScenarioDetailsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -868,14 +871,6 @@
 				minimumVersion = 1.5.2;
 			};
 		};
-		FBE9854D2CA001EC006FB544 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -893,11 +888,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FB5D89CC2D26F55400F4185E /* XCRemoteSwiftPackageReference "DittoSwiftPackage" */;
 			productName = DittoSwift;
-		};
-		FBE9854E2CA001EC006FB544 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FBE9854D2CA001EC006FB544 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

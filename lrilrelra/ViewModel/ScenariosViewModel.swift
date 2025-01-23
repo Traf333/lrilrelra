@@ -11,7 +11,7 @@ import Foundation
 
 class ScenariosViewModel: ObservableObject {
   @Published var scenarios: [Scenario] = []
-  // private var observable
+
   private var observer: DittoStoreObserver?
 
   init() {
@@ -30,11 +30,26 @@ class ScenariosViewModel: ObservableObject {
     observer?.cancel()
   }
 
-  func addScenario(_ scenario: Scenario) async {
+  func addScenario(_ scenario: Scenario, speeches: [Speech] = []) async {
     do {
       try await DittoService.shared.ditto.store.execute(
         query: "INSERT INTO `scenarios` DOCUMENTS (:newScenario) ON ID CONFLICT DO UPDATE",
         arguments: ["newScenario": scenario.docDictionary()])
+
+      let queryPlaceholders = speeches.enumerated().map { "(:speech\($0.offset))" }.joined(
+        separator: ", ")
+      let query = "INSERT INTO `speeches` DOCUMENTS \(queryPlaceholders) ON ID CONFLICT DO UPDATE"
+
+      var arguments: [String: Any] = [:]
+      for (index, speech) in speeches.enumerated() {
+        arguments["speech\(index)"] = speech.docDictionary()
+      }
+
+      try await DittoService.shared.ditto.store.execute(
+        query: query,
+        arguments: arguments
+      )
+
     } catch {
       print("addScenario Error: \(error)")
     }

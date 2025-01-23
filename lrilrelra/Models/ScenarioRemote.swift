@@ -31,26 +31,28 @@ struct ScenarioRemote: Codable, Hashable {
     id?.id.string
   }
 
-  // func buildScenario() -> Scenario {
-  //   var position = 0
-  //   let newScenario =  Scenario()
-  //   newScenario.title = self.title
-  //   //        newScenario.releaseDate = Date()
-  //   //        newScenario.source = "remote"
-  //   //        newScenario.author = self.author ?? ""
-  //   ////        newScenario.roles
-  //   //        print("Start to build new scenario")
-  //   //        let speeches = self.content.split(separator: "\n").map {
-  //   //            position += 1
-  //   //            let speech = Speech()
-  //   //            speech.content = String($0)
-  //   //            speech.position = position
-  //   //            return speech
-  //   //        }
-  //   //        newScenario.speeches.append(objectsIn: speeches)
-  //   print("New scenario")
-  //   return newScenario
-  // }
+  func buildScenario() -> (Scenario, [Speech]) {
+    var position = 0
+    let newScenario = Scenario(
+      id: UUID().uuidString,
+      title: self.title,
+      author: self.author ?? "",
+      createdAt: Date()
+    )
+
+    let speeches = self.content.split(separator: "\n").map {
+      position += 1
+      let speech = Speech(
+        id: UUID().uuidString,
+        scenarioId: newScenario.id,
+        content: String($0),
+        position: position
+      )
+      return speech
+    }
+
+    return (newScenario, speeches)
+  }
 
   func document() -> [String: Any] {
     return [
