@@ -106,7 +106,8 @@ struct ScenariosView: View {
             ) { newScenario, publishToLibrary in
               // Submit button action
               if publishToLibrary {
-                //                publish to lib
+                let libraryViewModel = LibraryViewModel()
+                libraryViewModel.addScenario(newScenario)
               }
               print("newScenario: \(newScenario)")
               let (scenario, speeches) = newScenario.buildScenario()
