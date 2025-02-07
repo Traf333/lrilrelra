@@ -13,7 +13,8 @@ struct SpeechRowView: View {
   var selected: Bool = false
   var onRoleSelect: (String) -> Void
   var onDelete: () -> Void
-  var toggleBookmark: () -> Void
+  var toggleBookmark: (Speech) async -> Void
+  var onUpdateSpeech: (Speech) async -> Void
 
   var body: some View {
     VStack {
@@ -28,12 +29,19 @@ struct SpeechRowView: View {
           Label("Select Role", systemImage: "person.2")
         }
 
-        NavigationLink(destination: SpeechEditView()) {
+        NavigationLink(
+          destination: SpeechEditView(
+            speech: speech,
+            onSave: onUpdateSpeech
+          )
+        ) {
           Label("Edit", systemImage: "square.and.pencil")
         }
 
         Button {
-          toggleBookmark()
+          Task {
+            await toggleBookmark(speech)
+          }
         } label: {
           Label(
             inBookmarks ? "Remove from bookmarks" : "Add to bookmarks",

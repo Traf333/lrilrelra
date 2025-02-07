@@ -13,6 +13,7 @@ struct Speech: Identifiable, Hashable, Equatable {
   var scenarioId: String
   var content: String
   var position: Int
+  var isBookmark: Bool = false
 
   init(id: String, scenarioId: String, content: String, position: Int) {
     self.id = id
@@ -29,6 +30,7 @@ extension Speech {
       "content": content,
       "position": position,
       "scenarioId": scenarioId,
+      "isBookmark": isBookmark,
     ]
   }
 }
@@ -39,6 +41,7 @@ extension Speech: DittoDecodable {
     self.scenarioId = value["scenarioId"] as? String ?? ""
     self.content = value["content"] as? String ?? ""
     self.position = value["position"] as? Int ?? 0
+    self.isBookmark = value["isBookmark"] as? Bool ?? false
   }
 }
 

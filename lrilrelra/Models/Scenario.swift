@@ -7,12 +7,6 @@
 import DittoSwift
 import Foundation
 
-struct Role: Identifiable, Hashable, Equatable {
-  var id: String
-  var name: String
-  var aliases: String
-}
-
 struct Scenario: Identifiable, Hashable, Equatable {
   var id: String
   var title: String
@@ -21,7 +15,6 @@ struct Scenario: Identifiable, Hashable, Equatable {
   var createdAt: Date
   var source: String?
   var createdBy: String?
-  var roles: [Role] = []
 }
 
 extension Scenario {
@@ -42,7 +35,6 @@ extension Scenario {
     self.releaseYear = releaseYear
     self.source = source
     self.createdBy = createdBy
-    self.roles = roles.map { Role(id: UUID().uuidString, name: $0, aliases: "") }
   }
 }
 
@@ -56,7 +48,6 @@ extension Scenario {
       "releaseYear": releaseYear,
       "source": source,
       "createdBy": createdBy,
-      "roles": roles,
     ]
   }
 }
@@ -70,7 +61,6 @@ extension Scenario: DittoDecodable {
     self.releaseYear = value["releaseYear"] as? Int ?? 0
     self.source = value["source"] as? String
     self.createdBy = value["createdBy"] as? String
-    self.roles = value["roles"] as? [Role] ?? []
   }
 }
 
@@ -83,8 +73,7 @@ extension Scenario {
       releaseYear: 2008,
       createdAt: Date(),
       source: "source",
-      createdBy: "createdBy",
-      roles: ["role1", "role2"]
+      createdBy: "createdBy"
     )
   }
 }

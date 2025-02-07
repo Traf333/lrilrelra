@@ -12,18 +12,29 @@ class ScenarioDetailsViewModel: ObservableObject {
   @Published var scenario: Scenario
   @Published var speeches: [Speech] = []
   @Published var bookmarks: [Speech] = []
-  // @Published var bookmarkIds: [String] = []
 
-  private var observer: DittoStoreObserver?
+  private var speechesObserver: DittoStoreObserver?
+  private var bookmarksObserver: DittoStoreObserver?
 
   init(scenario: Scenario) {
     self.scenario = scenario
     print("Started scenario: \(scenario)")
     do {
-      observer = try DittoService.shared.ditto.store.registerObserver(
+      speechesObserver = try DittoService.shared.ditto.store.registerObserver(
         query: "SELECT * FROM `speeches` WHERE `scenarioId` = '\(scenario.id)' ORDER BY `position`"
       ) { [weak self] result in
         self?.speeches = result.items.compactMap { Speech(value: $0.value) }
+      }
+    } catch {
+      print("ScenarioViewModel init error: \(error)")
+    }
+
+    do {
+      bookmarksObserver = try DittoService.shared.ditto.store.registerObserver(
+        query:
+          "SELECT * FROM `speeches` WHERE `scenarioId` = '\(scenario.id)' AND `isBookmark` = true ORDER BY `position`"
+      ) { [weak self] result in
+        self?.bookmarks = result.items.compactMap { Speech(value: $0.value) }
       }
     } catch {
       print("ScenarioViewModel init error: \(error)")
@@ -34,7 +45,7 @@ class ScenarioDetailsViewModel: ObservableObject {
     do {
       try await DittoService.shared.ditto.store.execute(
         query:
-          "UPDATE `scenarios` SET title = :title, author = :author, releaseYear = :releaseYear WHERE `_id` = '\(scenario.id)'",
+          "UPDATE `scenarios`SET title = :title, author = :author, releaseYear = :releaseYear WHERE `_id` = '\(scenario.id)'",
         arguments: [
           "title": scenario.title,
           "author": scenario.author,
@@ -47,35 +58,21 @@ class ScenarioDetailsViewModel: ObservableObject {
     print("updateScenario done : \(scenario)")
   }
 
-  // private var cachedBookmarks: [Speech] = []
-
-  // func bookmarks() -> [Speech] {
-  //   if cachedBookmarks.isEmpty {
-  //     cachedBookmarks = scenario.speeches.filter { scenario.bookmarkIds.contains($0._id) }
-  //   }
-  //   return cachedBookmarks
-  // }
-
-  // func addBookmark(_ speech: Speech) {
-  //   if !scenario.bookmarkIds.contains(speech._id) {
-  //     scenario.bookmarkIds.append(speech._id)
-  //     cachedBookmarks.append(speech)
-  //   }
-  // }
-
-  // func removeBookmark(_ speech: Speech) {
-  //   if let index = scenario.bookmarkIds.firstIndex(of: speech._id) {
-  //     scenario.bookmarkIds.remove(at: index)
-  //     cachedBookmarks.removeAll { $0._id == speech._id }
-  //   }
-  // }
-
-  func toggleBookmark(speech: Speech) {
-    print("toggleBookmark")
+  func toggleBookmark(speech: Speech) async {
+    do {
+      try await DittoService.shared.ditto.store.execute(
+        query:
+          "UPDATE `speeches` SET `isBookmark` = :isBookmark WHERE `_id` = :id",
+        arguments: ["id": speech.id, "isBookmark": !speech.isBookmark]
+      )
+    } catch {
+      print("Error updating speech: \(error.localizedDescription)")
+    }
   }
 
   deinit {
-    observer?.cancel()
+    speechesObserver?.cancel()
+    bookmarksObserver?.cancel()
   }
 
   func addSpeech(_ speech: Speech) async {

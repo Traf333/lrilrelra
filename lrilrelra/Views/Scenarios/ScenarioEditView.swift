@@ -59,11 +59,14 @@ struct ScenarioEditView: View {
         Text("Details")
       }
       Section {
-        ForEach($viewModel.scenario.roles) { role in
+        ForEach(Array($viewModel.scenario.roles.values)) { role in
           RoleRowView(role: role)
         }
         .onDelete { indexSet in
-          viewModel.scenario.roles.remove(atOffsets: indexSet)
+          if let first = indexSet.first {
+            let role = Array(viewModel.scenario.roles.values)[first]
+            viewModel.scenario.roles.removeValue(forKey: role.id)
+          }
         }
 
       } header: {
@@ -72,7 +75,7 @@ struct ScenarioEditView: View {
           Spacer()
           Button(action: {
             let newRole = Role(id: UUID().uuidString, name: "", aliases: "")
-            viewModel.scenario.roles.append(newRole)
+            viewModel.scenario.roles[newRole.id] = newRole
           }) {
             HStack {
               Image(systemName: "plus")
