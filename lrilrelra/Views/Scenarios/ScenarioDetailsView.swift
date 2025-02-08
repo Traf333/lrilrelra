@@ -120,25 +120,25 @@ struct ScenarioDetailsView: View {
     print("selectRole: \(content)")
     print("scenario roles: \(scenario.roles)")
     // Search through each role in the scenario's roles list
-    for role in scenario.roles.values {
-      // Check if the role name is a prefix of the content
-      if content.starts(with: role.name) {
-        selectedRole = role
-        return
-      }
-
-      // Split the role's aliases into an array by comma and check each alias
-      let aliasesArray = role.aliases.split(separator: ",").map {
-        $0.trimmingCharacters(in: .whitespacesAndNewlines)
-      }
-      print("aliasesArray: \(aliasesArray)")
-      for alias in aliasesArray {
-        if content.starts(with: alias) {
-          selectedRole = role
-          return
-        }
-      }
-    }
+//    for role in scenario.roles.values {
+//      // Check if the role name is a prefix of the content
+//      if content.starts(with: role.name) {
+//        selectedRole = role
+//        return
+//      }
+//
+//      // Split the role's aliases into an array by comma and check each alias
+//      let aliasesArray = role.aliases.split(separator: ",").map {
+//        $0.trimmingCharacters(in: .whitespacesAndNewlines)
+//      }
+//      print("aliasesArray: \(aliasesArray)")
+//      for alias in aliasesArray {
+//        if content.starts(with: alias) {
+//          selectedRole = role
+//          return
+//        }
+//      }
+//    }
 
     selectedRole = nil
   }

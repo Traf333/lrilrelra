@@ -58,33 +58,33 @@ struct ScenarioEditView: View {
       } header: {
         Text("Details")
       }
-      Section {
-        ForEach(Array($viewModel.scenario.roles.values)) { role in
-          RoleRowView(role: role)
-        }
-        .onDelete { indexSet in
-          if let first = indexSet.first {
-            let role = Array(viewModel.scenario.roles.values)[first]
-            viewModel.scenario.roles.removeValue(forKey: role.id)
-          }
-        }
-
-      } header: {
-        HStack {
-          Text("Roles")
-          Spacer()
-          Button(action: {
-            let newRole = Role(id: UUID().uuidString, name: "", aliases: "")
-            viewModel.scenario.roles[newRole.id] = newRole
-          }) {
-            HStack {
-              Image(systemName: "plus")
-              Text("Add Role")
-            }
-          }
-        }
-
-      }
+//      Section {
+//        ForEach(Array($viewModel.scenario.roles.values)) { role in
+//          RoleRowView(role: role)
+//        }
+//        .onDelete { indexSet in
+//          if let first = indexSet.first {
+//            let role = Array(viewModel.scenario.roles.values)[first]
+//            viewModel.scenario.roles.removeValue(forKey: role.id)
+//          }
+//        }
+//
+//      } header: {
+//        HStack {
+//          Text("Roles")
+//          Spacer()
+//          Button(action: {
+//            let newRole = Role(id: UUID().uuidString, name: "", aliases: "")
+//            viewModel.scenario.roles[newRole.id] = newRole
+//          }) {
+//            HStack {
+//              Image(systemName: "plus")
+//              Text("Add Role")
+//            }
+//          }
+//        }
+//
+//      }
     }
     .navigationTitle("Edit Scenario")
     .toolbar {

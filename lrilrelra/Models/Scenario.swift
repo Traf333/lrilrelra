@@ -15,6 +15,7 @@ struct Scenario: Identifiable, Hashable, Equatable {
   var createdAt: Date
   var source: String?
   var createdBy: String?
+  var roles: [String] = []
 }
 
 extension Scenario {

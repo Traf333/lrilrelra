@@ -21,6 +21,8 @@ class ScenariosViewModel: ObservableObject {
       ) { [weak self] result in
         self?.scenarios = result.items.compactMap { Scenario(value: $0.value) }
       }
+      try DittoService.shared.ditto.sync.registerSubscription(query: "SELECT * FROM `scenarios`")
+      try DittoService.shared.ditto.sync.registerSubscription(query: "SELECT * FROM `speeches`")
     } catch {
       print("ScenariosViewModel init error: \(error)")
     }
