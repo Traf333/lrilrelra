@@ -74,6 +74,13 @@
             ReferencedContainer = "container:lrilrelra.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "LIBRARY_DATABASE_URL"
+            value = "https://lrilrelra-api-vfwe.shuttle.app"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

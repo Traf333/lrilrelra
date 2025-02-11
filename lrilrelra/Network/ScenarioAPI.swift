@@ -8,60 +8,71 @@
 import Foundation
 
 class ScenarioAPI {
-    static let shared = ScenarioAPI()
-    
-    func fetchScenarios(completion: @escaping ([ScenarioRemote]?) -> Void) {
-        URLSession.shared.dataTask(with: API.remoteLibraryURL) { data, response, error in
-            guard let data = data, error == nil else {
-                print("error")
-                completion(nil)
-                return
-            }
-            print(data, "data")
-            if let scenarios = try? JSONDecoder().decode([ScenarioRemote].self, from: data) {
-                completion(scenarios)
-            } else {
-                print("some shit happened during fetch")
-            }
-        }.resume()
+  static let shared = ScenarioAPI()
+
+  private var databaseURL: URL {
+    guard let urlString = ProcessInfo.processInfo.environment["LIBRARY_DATABASE_URL"],
+      let url = URL(string: urlString + "/scenarios")
+            
+    else {
+      fatalError("DATABASE_URL not set in environment variables")
     }
-    
-    func createScenario(scenario: ScenarioRemote, completion: @escaping (ScenarioRemote?) -> Void) {
-        var request = URLRequest(url: API.remoteLibraryURL)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONEncoder().encode(scenario)
-        print("Creating scenario")
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if error != nil {
-                print("Error: \(String(describing: error))")
-                completion(nil)
-            } else if let data = data {
-                let records = try? JSONDecoder().decode([ScenarioRemote].self, from: data)
-                if let record = records?.first {
-                    print("created record \(String(describing: record))")
-                    completion(record)
-                }
-            }
-        }.resume()
-    }
-    
-    func deleteScenario(id: String, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: id, relativeTo: API.remoteLibraryURL) else { return }
-        print("deleting URL: \(url)")
-        var request = URLRequest(url: url)
-        request.httpMethod = "DELETE"
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            print("request processed")
-            print("\(String(describing: data))")
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                print("delete succeed")
-                completion(true)
-            } else {
-                print("delete fails")
-                completion(false)
-            }
-        }.resume()
-    }
+      print("url string \(urlString)")
+    return url
+  }
+
+  func fetchScenarios(completion: @escaping ([ScenarioRemote]?) -> Void) {
+    URLSession.shared.dataTask(with: databaseURL) { data, response, error in
+      guard let data = data, error == nil else {
+        print("error")
+        completion(nil)
+        return
+      }
+      print(data, "data")
+      if let scenarios = try? JSONDecoder().decode([ScenarioRemote].self, from: data) {
+        completion(scenarios)
+      } else {
+        print("some shit happened during fetch")
+      }
+    }.resume()
+  }
+
+  func createScenario(scenario: ScenarioRemote, completion: @escaping (ScenarioRemote?) -> Void) {
+    var request = URLRequest(url: databaseURL)
+    request.httpMethod = "POST"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.httpBody = try? JSONEncoder().encode(scenario)
+    print("Creating scenario")
+    URLSession.shared.dataTask(with: request) { data, response, error in
+      if error != nil {
+        print("Error: \(String(describing: error))")
+        completion(nil)
+      } else if let data = data {
+        let records = try? JSONDecoder().decode([ScenarioRemote].self, from: data)
+        if let record = records?.first {
+          print("created record \(String(describing: record))")
+          completion(record)
+        }
+      }
+    }.resume()
+  }
+
+  func deleteScenario(id: String, completion: @escaping (Bool) -> Void) {
+    guard let url = URL(string: id, relativeTo: databaseURL) else { return }
+    print("deleting URL: \(url)")
+    var request = URLRequest(url: url)
+    request.httpMethod = "DELETE"
+
+    URLSession.shared.dataTask(with: request) { data, response, error in
+      print("request processed")
+      print("\(String(describing: data))")
+      if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+        print("delete succeed")
+        completion(true)
+      } else {
+        print("delete fails")
+        completion(false)
+      }
+    }.resume()
+  }
 }

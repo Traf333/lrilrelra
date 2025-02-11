@@ -1,6 +1,15 @@
 {
-  "originHash" : "bafcd638f24998cd49726b4c4000b98ac8bc968d8f7087631212529d9d2ad1f5",
+  "originHash" : "768b975ef65735e6e05b7845ee4f3f73a1de2f855582e11f8a50a5981c0ac837",
   "pins" : [
+    {
+      "identity" : "dittoswiftpackage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/getditto/DittoSwiftPackage",
+      "state" : {
+        "revision" : "f5fe2be65db126bd0535f3f5e831e679b7aa2dad",
+        "version" : "4.9.2"
+      }
+    },
     {
       "identity" : "inject",
       "kind" : "remoteSourceControl",
@@ -8,24 +17,6 @@
       "state" : {
         "revision" : "728c56639ecb3df441d51d5bc6747329afabcfc9",
         "version" : "1.5.2"
-      }
-    },
-    {
-      "identity" : "realm-core",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-core.git",
-      "state" : {
-        "revision" : "e474a8d2270a8b12ac63ac9504e4757e39814b99",
-        "version" : "14.13.0"
-      }
-    },
-    {
-      "identity" : "realm-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-swift.git",
-      "state" : {
-        "branch" : "master",
-        "revision" : "02860d17d793e0d4f9c08ed937002d80e09fdffd"
       }
     }
   ],

@@ -5,34 +5,41 @@
 //  Created by Igor Trofimov on 09.08.2024.
 //
 
-import RealmSwift
 import SwiftUI
 
 struct ScenarioDetailsView: View {
-  @ObservedRealmObject var scenario: Scenario
+  var scenario: Scenario
+  @StateObject private var viewModel: ScenarioDetailsViewModel
+
+  init(scenario: Scenario) {
+    self.scenario = scenario
+    _viewModel = StateObject(wrappedValue: ScenarioDetailsViewModel(scenario: scenario))
+  }
 
   @State var selectedRole: Role? = nil
   @State var current: [Speech] = []
   @State var showingList: Bool = false
   @State var selectedSpeech: Speech? = nil
 
-  var bookmarks: [Speech] {
-    scenario.speeches.filter { scenario.bookmarkIds.contains($0._id) }
-  }
   var body: some View {
 
     VStack(alignment: .leading) {
       ScrollViewReader { proxy in
         ScrollView {
           LazyVStack(alignment: .leading, spacing: 0) {
-            ForEach(scenario.speeches) { speech in
+            ForEach(viewModel.speeches) { speech in
               SpeechRowView(
                 speech: speech,
-                inBookmarks: scenario.bookmarkIds.contains(speech._id),
+                inBookmarks: viewModel.bookmarks.contains(speech),
                 selected: speech == selectedSpeech,
                 onRoleSelect: selectRole,
-                onDelete: { deleteSpeech(speech: speech) },
-                toggleBookmark: { toggleBookmark(speech: speech) }
+                onDelete: {
+                  Task {
+                    await viewModel.deleteSpeech(speech: speech)
+                  }
+                },
+                toggleBookmark: viewModel.toggleBookmark,
+                onUpdateSpeech: viewModel.updateSpeech
               )
               .id(speech.position)
               .opacity(getOpacity(speech.content))
@@ -44,7 +51,7 @@ struct ScenarioDetailsView: View {
 
         }.sheet(isPresented: $showingList) {
           List {
-            ForEach(bookmarks) { speech in
+            ForEach(viewModel.bookmarks) { speech in
               Button(action: {
                 proxy.scrollTo(speech.position, anchor: .top)
 
@@ -67,23 +74,25 @@ struct ScenarioDetailsView: View {
       }
     }
     .toolbar {
-        if let speech = selectedSpeech {
-            ToolbarItemGroup(placement: .bottomBar) {
-              PlayerView(scenarioId: scenario._id, speechId: speech._id)
-            }
+      if let speech = selectedSpeech {
+        ToolbarItemGroup(placement: .bottomBar) {
+          PlayerView(scenarioId: scenario.id, speechId: speech.id)
         }
-        
+      }
+
       ToolbarItemGroup(placement: .navigationBarTrailing) {
-        NavigationLink(destination: ScenarioEditView(scenario: scenario)) {
+        NavigationLink(
+          destination: ScenarioEditView(viewModel: viewModel)
+        ) {
           Image(systemName: "square.and.pencil")
         }
-          Button(action: {
-            withAnimation {
-              showingList.toggle()
-            }
-          }) {
-            Image(systemName: "list.bullet")
+        Button(action: {
+          withAnimation {
+            showingList.toggle()
           }
+        }) {
+          Image(systemName: "list.bullet")
+        }
       }
     }
     .navigationTitle(scenario.title)
@@ -108,59 +117,30 @@ struct ScenarioDetailsView: View {
   }
 
   func selectRole(_ content: String) {
+    print("selectRole: \(content)")
+    print("scenario roles: \(scenario.roles)")
     // Search through each role in the scenario's roles list
-    for role in scenario.roles {
-      // Check if the role name is a prefix of the content
-      if content.starts(with: role.name) {
-        selectedRole = role
-        return
-      }
+//    for role in scenario.roles.values {
+//      // Check if the role name is a prefix of the content
+//      if content.starts(with: role.name) {
+//        selectedRole = role
+//        return
+//      }
+//
+//      // Split the role's aliases into an array by comma and check each alias
+//      let aliasesArray = role.aliases.split(separator: ",").map {
+//        $0.trimmingCharacters(in: .whitespacesAndNewlines)
+//      }
+//      print("aliasesArray: \(aliasesArray)")
+//      for alias in aliasesArray {
+//        if content.starts(with: alias) {
+//          selectedRole = role
+//          return
+//        }
+//      }
+//    }
 
-      // Split the role's aliases into an array by comma and check each alias
-      let aliasesArray = role.aliases.split(separator: ",").map {
-        $0.trimmingCharacters(in: .whitespacesAndNewlines)
-      }
-
-      for alias in aliasesArray {
-        if content.starts(with: alias) {
-          selectedRole = role
-          return
-        }
-      }
-    }
-
-    // If no matching role is found, you can handle it here (e.g., set selectedRole to nil)
     selectedRole = nil
-  }
-
-  private func deleteSpeech(speech: Speech) {
-    do {
-      if let index = scenario.speeches.index(of: speech) {
-        let realm = try! Realm()
-
-        try realm.write {
-          $scenario.speeches.remove(at: index)
-        }
-      }
-    } catch let error {
-      print(error.localizedDescription)
-    }
-  }
-
-  private func toggleBookmark(speech: Speech) {
-    do {
-      let realm = try! Realm()
-
-      try realm.write {
-        if scenario.bookmarkIds.contains(speech._id) {
-          $scenario.bookmarkIds.remove(at: scenario.bookmarkIds.index(of: speech._id)!)
-        } else {
-          $scenario.bookmarkIds.append(speech._id)
-        }
-      }
-    } catch let error {
-      print(error.localizedDescription)
-    }
   }
 
 }

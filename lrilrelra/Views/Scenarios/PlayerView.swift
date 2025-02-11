@@ -5,13 +5,12 @@
 //  Created by Igor Trofimov on 22.12.2024.
 
 import AVFoundation
-import RealmSwift
 import SwiftUI
 
 struct PlayerView: View {
   @StateObject private var viewModel: PlayerViewModel
 
-  init(scenarioId: ObjectId, speechId: ObjectId) {
+  init(scenarioId: String, speechId: String) {
     _viewModel = StateObject(
       wrappedValue: PlayerViewModel(scenarioId: scenarioId, speechId: speechId))
   }
@@ -38,7 +37,7 @@ struct PlayerView: View {
             viewModel.isRecording ? viewModel.stopRecording() : viewModel.startRecording()
           }
         )
-        
+
         Button("Save", systemImage: "tray.and.arrow.down.fill", action: { /* Save action */  })
       }
     }
@@ -47,8 +46,9 @@ struct PlayerView: View {
 
 struct PlayerView_Previews: PreviewProvider {
   static var scenario = Scenario.example()
+  static var speeches = Speech.examples(n: 1)
   static var previews: some View {
 
-    PlayerView(scenarioId: scenario._id, speechId: scenario.speeches.first!._id)
+    PlayerView(scenarioId: scenario.id, speechId: speeches.first!.id)
   }
 }

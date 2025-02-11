@@ -6,7 +6,6 @@
 //
 
 import AVFoundation
-import RealmSwift
 import SwiftUI
 
 class PlayerViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
@@ -18,16 +17,15 @@ class PlayerViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
   private var audioRecorder: AVAudioRecorder?
   private var audioPlayer: AVAudioPlayer?
 
-  var scenarioId: ObjectId
-  var speechId: ObjectId
+  var scenarioId: String
+  var speechId: String
 
-  init(scenarioId: ObjectId, speechId: ObjectId) {
+  init(scenarioId: String, speechId: String) {
     self.scenarioId = scenarioId
     self.speechId = speechId
-    let realm = try! Realm()
-    let audios = realm.objects(Audio.self).filter("speechId == %@", speechId)
-    self.recordedAudio = audios.first
-    self.audios = Array(audios)
+
+//    self.recordedAudio = audios.first
+    self.audios = []
   }
 
   func startRecording() {
@@ -66,11 +64,13 @@ class PlayerViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
         let audioData = try Data(contentsOf: audioURL)
         audioPlayer = try AVAudioPlayer(data: audioData)
 
-        let newAudio = Audio()
-        newAudio.scenarioId = scenarioId
-        newAudio.speechId = speechId
-        newAudio.audioData = audioData
-        newAudio.uploadedAt = Date()
+        let newAudio = Audio(
+          id: UUID().uuidString,
+          scenarioId: scenarioId,
+          speechId: speechId,
+          audioData: audioData,
+          uploadedAt: Date()
+        )
         recordedAudio = newAudio
       } catch {
         print("Failed to load audio data: \(error)")
@@ -78,17 +78,22 @@ class PlayerViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
     }
   }
 
-  func saveRecord() {
+  func saveRecord() async {
     if let audioData = audioRecorder?.url {
-      let newAudio = Audio()
-      newAudio.scenarioId = scenarioId
-      newAudio.speechId = speechId
-      newAudio.audioData = try! Data(contentsOf: audioData)
-      newAudio.uploadedAt = Date()
-
-      let realm = try! Realm()
-      try! realm.write {
-        realm.add(newAudio)
+      let newAudio = Audio(
+        id: UUID().uuidString,
+        scenarioId: scenarioId,
+        speechId: speechId,
+        audioData: try! Data(contentsOf: audioData),
+        uploadedAt: Date()
+      )
+      do {
+        try await DittoService.shared.ditto.store.execute(
+          query: "INSERT INTO `audios` DOCUMENTS (:newAudio) ON ID CONFLICT DO UPDATE",
+          arguments: ["newAudio": newAudio.docDictionary()]
+        )
+      } catch {
+        print("Error saving audio: \(error)")
       }
     }
   }

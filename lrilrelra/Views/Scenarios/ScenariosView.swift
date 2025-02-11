@@ -5,7 +5,6 @@
 //  Created by Igor Trofimov on 09.08.2024.
 //
 
-import RealmSwift
 import SwiftUI
 
 enum AddFromSource: String, Identifiable {
@@ -16,22 +15,18 @@ enum AddFromSource: String, Identifiable {
 }
 
 struct ScenariosView: View {
-  @ObservedResults(Scenario.self) var scenarios
+  @StateObject private var viewModel = ScenariosViewModel()
   @State private var addNewScenario = false
 
   @State private var addFromSource: AddFromSource? = nil
-  @State private var isPresentingAddModal = false
   @State private var newTitle = ""
   @State private var newAuthor = ""
   @State private var newActorsNumber = 1
   @State private var newContent = ""
-
-  var viewModel = LibraryViewModel()
-
   var body: some View {
     NavigationStack {
       List {
-        ForEach(scenarios) { item in
+        ForEach(viewModel.scenarios) { item in
           NavigationLink {
             ScenarioDetailsView(scenario: item)
           } label: {
@@ -43,8 +38,6 @@ struct ScenariosView: View {
                   Text(item.author).font(.subheadline).foregroundStyle(.secondary)
                 }
                 HStack {
-                  Text(item.releaseDate, format: Date.FormatStyle(date: .numeric))
-
                   if item.roles.count > 0 {
                     HStack {
                       Text("\(item.roles.count)")
@@ -57,13 +50,21 @@ struct ScenariosView: View {
             ).padding(.vertical, 4)
           }
         }
-        .onDelete(perform: deleteItems)
-        Button(action: { addNewScenario = true }) {
-          Label("Add Scenario", systemImage: "folder.badge.plus")
+        .onDelete { indexSet in
+          indexSet.forEach { index in
+            Task {
+              await viewModel.deleteScenario(viewModel.scenarios[index])
+            }
+          }
+        }
+        if !viewModel.scenarios.isEmpty {
+          Button(action: { addNewScenario = true }) {
+            Label("Add Scenario", systemImage: "folder.badge.plus")
+          }
         }
       }
       .toolbar {
-        if !scenarios.isEmpty {
+        if !viewModel.scenarios.isEmpty {
           ToolbarItem(placement: .navigationBarTrailing) {
             EditButton()
           }
@@ -96,16 +97,23 @@ struct ScenariosView: View {
             LibraryView()
           } else if source == .file {
             AddScenarioModalView(
-              isPresented: $isPresentingAddModal, newTitle: $newTitle,
+              newTitle: $newTitle,
               newAuthor: $newAuthor, newActorsNumber: $newActorsNumber,
-              newContent: $newContent
+              newContent: $newContent,
+              onCancel: {
+                addFromSource = nil
+              }
             ) { newScenario, publishToLibrary in
               // Submit button action
               if publishToLibrary {
-                viewModel.addScenario(newScenario)
+                let libraryViewModel = LibraryViewModel()
+                libraryViewModel.addScenario(newScenario)
               }
-              let scenario = newScenario.buildScenario()
-              $scenarios.append(scenario)
+              print("newScenario: \(newScenario)")
+              let (scenario, speeches) = newScenario.buildScenario()
+              Task {
+                await viewModel.addScenario(scenario, speeches: speeches)
+              }
 
               addFromSource = nil
             }
@@ -115,7 +123,7 @@ struct ScenariosView: View {
 
       }
       .overlay {
-        if scenarios.isEmpty {
+        if viewModel.scenarios.isEmpty {
           ContentUnavailableView(
             label: {
               Label("No Scenarios", systemImage: "book.pages")
@@ -129,12 +137,6 @@ struct ScenariosView: View {
           ).offset(y: -60)
         }
       }
-    }
-  }
-
-  private func deleteItems(offsets: IndexSet) {
-    withAnimation {
-      $scenarios.remove(atOffsets: offsets)
     }
   }
 }

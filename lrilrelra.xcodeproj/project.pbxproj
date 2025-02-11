@@ -17,12 +17,19 @@
 		FB0EB0DC2C6CB86300E5A859 /* AddScenarioModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EB0DB2C6CB86300E5A859 /* AddScenarioModalView.swift */; };
 		FB0EB0E02C6CBB1900E5A859 /* zov.txt in Resources */ = {isa = PBXBuildFile; fileRef = FB0EB0DF2C6CBB1900E5A859 /* zov.txt */; };
 		FB2060762C95E4100070E5EA /* SpeechEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2060752C95E4100070E5EA /* SpeechEditView.swift */; };
+		FB2920862D3286460081E13B /* ScenariosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2920852D3286460081E13B /* ScenariosViewModel.swift */; };
 		FB4014612D049F19002DD282 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = FB4014602D049F19002DD282 /* Inject */; };
 		FB5D7DA72C88749800CF585B /* FilePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D7DA62C88749800CF585B /* FilePickerView.swift */; };
 		FB5D7DA92C8C4D3700CF585B /* SpeechRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D7DA82C8C4D3700CF585B /* SpeechRowView.swift */; };
 		FB5D7DAD2C8EEFF600CF585B /* ScenarioEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D7DAC2C8EEFF600CF585B /* ScenarioEditView.swift */; };
 		FB5D89C92D254D1A00F4185E /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = FB5D89C82D254D1A00F4185E /* Config.xcconfig */; };
 		FB5D89CB2D254FAC00F4185E /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D89CA2D254FAC00F4185E /* Configuration.swift */; };
+		FB5D89CE2D26F55400F4185E /* DittoObjC in Frameworks */ = {isa = PBXBuildFile; productRef = FB5D89CD2D26F55400F4185E /* DittoObjC */; };
+		FB5D89D02D26F55400F4185E /* DittoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FB5D89CF2D26F55400F4185E /* DittoSwift */; };
+		FB5D89D52D27E16000F4185E /* DittoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D89D42D27E16000F4185E /* DittoService.swift */; };
+		FB5D89D72D27E1CF00F4185E /* MockTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5D89D62D27E1CF00F4185E /* MockTest.swift */; };
+		FB7D10D82D5630C600AF3806 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7D10D72D5630C600AF3806 /* Role.swift */; };
+		FBD53D3A2D4252AE000BA19E /* Inputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD53D392D4252AE000BA19E /* Inputs.swift */; };
 		FBD888F82C6606BE00BD9D73 /* Lrilrelra.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD888F72C6606BE00BD9D73 /* Lrilrelra.swift */; };
 		FBD888FA2C6606BE00BD9D73 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD888F92C6606BE00BD9D73 /* ContentView.swift */; };
 		FBD888FC2C6606BE00BD9D73 /* Scenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD888FB2C6606BE00BD9D73 /* Scenario.swift */; };
@@ -33,11 +40,9 @@
 		FBD889172C6606BF00BD9D73 /* lrilrelraUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD889162C6606BF00BD9D73 /* lrilrelraUITestsLaunchTests.swift */; };
 		FBD889282C66257F00BD9D73 /* ScenariosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD889272C66257F00BD9D73 /* ScenariosView.swift */; };
 		FBD8892A2C66264800BD9D73 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD889292C66264800BD9D73 /* LibraryView.swift */; };
-		FBD8892C2C66265300BD9D73 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD8892B2C66265300BD9D73 /* SettingsView.swift */; };
 		FBD8892F2C6629D500BD9D73 /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD8892E2C6629D500BD9D73 /* Speech.swift */; };
 		FBD889332C66407000BD9D73 /* ScenarioDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD889322C66407000BD9D73 /* ScenarioDetailsView.swift */; };
-		FBE9854F2CA001EC006FB544 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FBE9854E2CA001EC006FB544 /* RealmSwift */; };
-		FBE985502CA01D6C006FB544 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = FBE9854E2CA001EC006FB544 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		FBE618BF2D3BCAA2002C671D /* ScenarioDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE618BE2D3BCAA2002C671D /* ScenarioDetailsViewModel.swift */; };
 		FBEF3BE62C874C4100D1886F /* Repka drawing for kids.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FBEF3BDF2C874C4100D1886F /* Repka drawing for kids.jpg */; };
 		FBEF3BE72C874C4100D1886F /* Repka drawing for kids.png in Resources */ = {isa = PBXBuildFile; fileRef = FBEF3BE02C874C4100D1886F /* Repka drawing for kids.png */; };
 		FBEF3BE82C874C4100D1886F /* Repka drawing pencil kids (1).jpg in Resources */ = {isa = PBXBuildFile; fileRef = FBEF3BE12C874C4100D1886F /* Repka drawing pencil kids (1).jpg */; };
@@ -72,7 +77,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FBE985502CA01D6C006FB544 /* RealmSwift in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,11 +94,16 @@
 		FB0EB0DB2C6CB86300E5A859 /* AddScenarioModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScenarioModalView.swift; sourceTree = "<group>"; };
 		FB0EB0DF2C6CBB1900E5A859 /* zov.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = zov.txt; sourceTree = "<group>"; };
 		FB2060752C95E4100070E5EA /* SpeechEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEditView.swift; sourceTree = "<group>"; };
+		FB2920852D3286460081E13B /* ScenariosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenariosViewModel.swift; sourceTree = "<group>"; };
 		FB5D7DA62C88749800CF585B /* FilePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerView.swift; sourceTree = "<group>"; };
 		FB5D7DA82C8C4D3700CF585B /* SpeechRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRowView.swift; sourceTree = "<group>"; };
 		FB5D7DAC2C8EEFF600CF585B /* ScenarioEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioEditView.swift; sourceTree = "<group>"; };
 		FB5D89C82D254D1A00F4185E /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FB5D89CA2D254FAC00F4185E /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		FB5D89D42D27E16000F4185E /* DittoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DittoService.swift; sourceTree = "<group>"; };
+		FB5D89D62D27E1CF00F4185E /* MockTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTest.swift; sourceTree = "<group>"; };
+		FB7D10D72D5630C600AF3806 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
+		FBD53D392D4252AE000BA19E /* Inputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inputs.swift; sourceTree = "<group>"; };
 		FBD888F42C6606BE00BD9D73 /* lrilrelra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lrilrelra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBD888F72C6606BE00BD9D73 /* Lrilrelra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lrilrelra.swift; sourceTree = "<group>"; };
 		FBD888F92C6606BE00BD9D73 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,9 +117,9 @@
 		FBD889162C6606BF00BD9D73 /* lrilrelraUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lrilrelraUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FBD889272C66257F00BD9D73 /* ScenariosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenariosView.swift; sourceTree = "<group>"; };
 		FBD889292C66264800BD9D73 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
-		FBD8892B2C66265300BD9D73 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FBD8892E2C6629D500BD9D73 /* Speech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speech.swift; sourceTree = "<group>"; };
 		FBD889322C66407000BD9D73 /* ScenarioDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioDetailsView.swift; sourceTree = "<group>"; };
+		FBE618BE2D3BCAA2002C671D /* ScenarioDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioDetailsViewModel.swift; sourceTree = "<group>"; };
 		FBEF3BDF2C874C4100D1886F /* Repka drawing for kids.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Repka drawing for kids.jpg"; sourceTree = "<group>"; };
 		FBEF3BE02C874C4100D1886F /* Repka drawing for kids.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Repka drawing for kids.png"; sourceTree = "<group>"; };
 		FBEF3BE12C874C4100D1886F /* Repka drawing pencil kids (1).jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Repka drawing pencil kids (1).jpg"; sourceTree = "<group>"; };
@@ -126,8 +135,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBE9854F2CA001EC006FB544 /* RealmSwift in Frameworks */,
 				FB4014612D049F19002DD282 /* Inject in Frameworks */,
+				FB5D89CE2D26F55400F4185E /* DittoObjC in Frameworks */,
+				FB5D89D02D26F55400F4185E /* DittoSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +172,8 @@
 			children = (
 				FB0EB0D12C6B562F00E5A859 /* LibraryViewModel.swift */,
 				FB0B87F52D1B3BBD00AEEC14 /* PlayerViewModel.swift */,
+				FB2920852D3286460081E13B /* ScenariosViewModel.swift */,
+				FBE618BE2D3BCAA2002C671D /* ScenarioDetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -209,8 +221,18 @@
 			isa = PBXGroup;
 			children = (
 				FB5D7DA62C88749800CF585B /* FilePickerView.swift */,
+				FBD53D392D4252AE000BA19E /* Inputs.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		FB5D89D32D27E14D00F4185E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				FB5D89D42D27E16000F4185E /* DittoService.swift */,
+				FB5D89D62D27E1CF00F4185E /* MockTest.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		FBD888EB2C6606BE00BD9D73 = {
@@ -239,6 +261,7 @@
 		FBD888F62C6606BE00BD9D73 /* lrilrelra */ = {
 			isa = PBXGroup;
 			children = (
+				FB5D89D32D27E14D00F4185E /* Data */,
 				FB0EB0D02C6B538200E5A859 /* Resources */,
 				FB0EB0CF2C6B537400E5A859 /* Utility */,
 				FB0EB0CE2C6B536900E5A859 /* Network */,
@@ -282,7 +305,6 @@
 			children = (
 				FB5D7DA52C88748600CF585B /* Components */,
 				FB0EB0C52C6A173200E5A859 /* Speeches */,
-				FBD889262C66256100BD9D73 /* Settings */,
 				FBD889252C66255700BD9D73 /* Library */,
 				FBD889242C66253F00BD9D73 /* Scenarios */,
 			);
@@ -310,14 +332,6 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
-		FBD889262C66256100BD9D73 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				FBD8892B2C66265300BD9D73 /* SettingsView.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
 		FBD8892D2C6629B900BD9D73 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,6 +339,7 @@
 				FBD8892E2C6629D500BD9D73 /* Speech.swift */,
 				FB0EB0D52C6B5A3B00E5A859 /* ScenarioRemote.swift */,
 				FB0B87F32D1AF4AD00AEEC14 /* Audio.swift */,
+				FB7D10D72D5630C600AF3806 /* Role.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -419,8 +434,8 @@
 			);
 			mainGroup = FBD888EB2C6606BE00BD9D73;
 			packageReferences = (
-				FBE9854D2CA001EC006FB544 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				FBB772312D049A87005FF1D5 /* XCRemoteSwiftPackageReference "Inject" */,
+				FB5D89CC2D26F55400F4185E /* XCRemoteSwiftPackageReference "DittoSwiftPackage" */,
 			);
 			productRefGroup = FBD888F52C6606BE00BD9D73 /* Products */;
 			projectDirPath = "";
@@ -474,6 +489,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB5D89D52D27E16000F4185E /* DittoService.swift in Sources */,
 				FBD889282C66257F00BD9D73 /* ScenariosView.swift in Sources */,
 				FB0B87F62D1B3BBD00AEEC14 /* PlayerViewModel.swift in Sources */,
 				FB5D7DA92C8C4D3700CF585B /* SpeechRowView.swift in Sources */,
@@ -487,14 +503,18 @@
 				FB0B87F22D181A2200AEEC14 /* PlayerView.swift in Sources */,
 				FB2060762C95E4100070E5EA /* SpeechEditView.swift in Sources */,
 				FBD8892F2C6629D500BD9D73 /* Speech.swift in Sources */,
+				FBD53D3A2D4252AE000BA19E /* Inputs.swift in Sources */,
 				FB0EB0D62C6B5A3B00E5A859 /* ScenarioRemote.swift in Sources */,
-				FBD8892C2C66265300BD9D73 /* SettingsView.swift in Sources */,
 				FB0EB0D42C6B56AE00E5A859 /* ScenarioAPI.swift in Sources */,
 				FBD889332C66407000BD9D73 /* ScenarioDetailsView.swift in Sources */,
+				FB2920862D3286460081E13B /* ScenariosViewModel.swift in Sources */,
 				FB0EB0DC2C6CB86300E5A859 /* AddScenarioModalView.swift in Sources */,
 				FBD8892A2C66264800BD9D73 /* LibraryView.swift in Sources */,
 				FBD888F82C6606BE00BD9D73 /* Lrilrelra.swift in Sources */,
+				FB5D89D72D27E1CF00F4185E /* MockTest.swift in Sources */,
+				FB7D10D82D5630C600AF3806 /* Role.swift in Sources */,
 				FB0EB0D82C6CB1EA00E5A859 /* ScenarioRemoteView.swift in Sources */,
+				FBE618BF2D3BCAA2002C671D /* ScenarioDetailsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +684,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = lrilrelra/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Uses Bluetooth to connect and sync with nearby devices";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Uses Bluetooth to connect and sync with nearby devices";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Uses WiFi to connect and sync with nearby devices";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need microphone access to record speeches for scenarios";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -700,6 +723,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = lrilrelra/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Uses Bluetooth to connect and sync with nearby devices";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Uses Bluetooth to connect and sync with nearby devices";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Uses WiFi to connect and sync with nearby devices";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need microphone access to record speeches for scenarios";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -833,20 +859,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FB5D89CC2D26F55400F4185E /* XCRemoteSwiftPackageReference "DittoSwiftPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/getditto/DittoSwiftPackage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.9.2;
+			};
+		};
 		FBB772312D049A87005FF1D5 /* XCRemoteSwiftPackageReference "Inject" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/krzysztofzablocki/Inject.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.5.2;
-			};
-		};
-		FBE9854D2CA001EC006FB544 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -857,10 +883,15 @@
 			package = FBB772312D049A87005FF1D5 /* XCRemoteSwiftPackageReference "Inject" */;
 			productName = Inject;
 		};
-		FBE9854E2CA001EC006FB544 /* RealmSwift */ = {
+		FB5D89CD2D26F55400F4185E /* DittoObjC */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FBE9854D2CA001EC006FB544 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
+			package = FB5D89CC2D26F55400F4185E /* XCRemoteSwiftPackageReference "DittoSwiftPackage" */;
+			productName = DittoObjC;
+		};
+		FB5D89CF2D26F55400F4185E /* DittoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FB5D89CC2D26F55400F4185E /* XCRemoteSwiftPackageReference "DittoSwiftPackage" */;
+			productName = DittoSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
