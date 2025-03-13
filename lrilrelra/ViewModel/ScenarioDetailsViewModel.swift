@@ -15,6 +15,7 @@ class ScenarioDetailsViewModel: ObservableObject {
 
   private var speechesObserver: DittoStoreObserver?
   private var bookmarksObserver: DittoStoreObserver?
+  private var audiosObserver: DittoStoreObserver?
 
   init(scenario: Scenario) {
     self.scenario = scenario
@@ -106,6 +107,27 @@ class ScenarioDetailsViewModel: ObservableObject {
       )
     } catch {
       print("Error deleting speech: \(error.localizedDescription)")
+    }
+  }
+
+  func addAudio(speechId: String, audioURL: URL) async {
+      do {
+          let newAttachment = try await DittoService.shared.ditto.store.newAttachment(
+            path: audioURL.path)
+
+          DittoService.shared.ditto.store["speeches"].findByID(speechId).update {
+            mutableSpeech in
+            mutableSpeech?["audioToken"].set(newAttachment)
+          }
+      } catch {
+          print("Can not store audio: \(error.localizedDescription)")
+      }
+  }
+
+  func deleteAudio(speechId: String) {
+    DittoService.shared.ditto.store["speeches"].findByID(speechId).update {
+      mutableSpeech in
+      mutableSpeech?["audioToken"].set(nil)
     }
   }
 }

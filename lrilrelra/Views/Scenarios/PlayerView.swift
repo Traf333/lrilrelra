@@ -8,9 +8,20 @@ import AVFoundation
 import SwiftUI
 
 struct PlayerView: View {
+  let scenarioId: String
+  let speechId: String
+  let onAudioSave: (URL) async -> Void
+
   @StateObject private var viewModel: PlayerViewModel
 
-  init(scenarioId: String, speechId: String) {
+  init(
+    scenarioId: String, speechId: String,
+    onAudioSave: @escaping (URL) async -> Void
+  ) {
+    self.scenarioId = scenarioId
+    self.speechId = speechId
+    self.onAudioSave = onAudioSave
+
     _viewModel = StateObject(
       wrappedValue: PlayerViewModel(scenarioId: scenarioId, speechId: speechId))
   }
@@ -34,11 +45,24 @@ struct PlayerView: View {
         Button(
           "Play/Pause", systemImage: viewModel.isRecording ? "stop.fill" : "mic.fill",
           action: {
-            viewModel.isRecording ? viewModel.stopRecording() : viewModel.startRecording()
+            if viewModel.isRecording {
+              viewModel.stopRecording()
+            } else {
+              viewModel.startRecording()
+            }
           }
         )
 
-        Button("Save", systemImage: "tray.and.arrow.down.fill", action: { /* Save action */  })
+          if let audioURL = viewModel.recordedAudioUrl() {
+              Button(
+                "Save", systemImage: "tray.and.arrow.down.fill",
+                action: {
+                    Task {
+                        await onAudioSave(audioURL)
+                    }
+                    
+                })
+          }
       }
     }
   }
@@ -49,6 +73,7 @@ struct PlayerView_Previews: PreviewProvider {
   static var speeches = Speech.examples(n: 1)
   static var previews: some View {
 
-    PlayerView(scenarioId: scenario.id, speechId: speeches.first!.id)
+    PlayerView(
+        scenarioId: scenario.id, speechId: speeches.first!.id, onAudioSave: { audio in print("Saved: \(audio)")})
   }
 }

@@ -9,8 +9,6 @@ import AVFoundation
 import SwiftUI
 
 class PlayerViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
-  @Published var audios: [Audio] = []
-  @Published var recordedAudio: Audio?
   @Published var isPlaying = false
   @Published var isRecording = false
 
@@ -23,9 +21,6 @@ class PlayerViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
   init(scenarioId: String, speechId: String) {
     self.scenarioId = scenarioId
     self.speechId = speechId
-
-//    self.recordedAudio = audios.first
-    self.audios = []
   }
 
   func startRecording() {
@@ -38,7 +33,7 @@ class PlayerViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
       return
     }
 
-    let audioFilename = getDocumentsDirectory().appendingPathComponent("\(speechId).m4a")
+    let audioFilename = getDocumentsDirectory().appendingPathComponent("\(UUID().uuidString).m4a")
     do {
       audioRecorder = try AVAudioRecorder(
         url: audioFilename,
@@ -59,41 +54,12 @@ class PlayerViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
   func stopRecording() {
     audioRecorder?.stop()
     isRecording = false
+
     if let audioURL = audioRecorder?.url {
       do {
-        let audioData = try Data(contentsOf: audioURL)
-        audioPlayer = try AVAudioPlayer(data: audioData)
-
-        let newAudio = Audio(
-          id: UUID().uuidString,
-          scenarioId: scenarioId,
-          speechId: speechId,
-          audioData: audioData,
-          uploadedAt: Date()
-        )
-        recordedAudio = newAudio
+        audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
       } catch {
-        print("Failed to load audio data: \(error)")
-      }
-    }
-  }
-
-  func saveRecord() async {
-    if let audioData = audioRecorder?.url {
-      let newAudio = Audio(
-        id: UUID().uuidString,
-        scenarioId: scenarioId,
-        speechId: speechId,
-        audioData: try! Data(contentsOf: audioData),
-        uploadedAt: Date()
-      )
-      do {
-        try await DittoService.shared.ditto.store.execute(
-          query: "INSERT INTO `audios` DOCUMENTS (:newAudio) ON ID CONFLICT DO UPDATE",
-          arguments: ["newAudio": newAudio.docDictionary()]
-        )
-      } catch {
-        print("Error saving audio: \(error)")
+        print("Failed to process recorded audio: \(error)")
       }
     }
   }
@@ -108,6 +74,10 @@ class PlayerViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
   func pause() {
     audioPlayer?.stop()
     isPlaying = false
+  }
+
+  func recordedAudioUrl() -> URL? {
+    audioRecorder?.url
   }
 
   // MARK: - AVAudioPlayerDelegate

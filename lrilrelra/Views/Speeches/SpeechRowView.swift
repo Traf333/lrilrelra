@@ -19,6 +19,9 @@ struct SpeechRowView: View {
   var body: some View {
     VStack {
       Text(speech.content)  // Display the speech content
+        if speech.audioToken != nil {
+            Text("audio exists")
+        }
     }.padding(8)
       .frame(maxWidth: .infinity, alignment: .leading)
       .background(selected ? Color.teal : Color.white)

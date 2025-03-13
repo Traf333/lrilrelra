@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		FB0B87F22D181A2200AEEC14 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0B87F12D181A2200AEEC14 /* PlayerView.swift */; };
-		FB0B87F42D1AF4AD00AEEC14 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0B87F32D1AF4AD00AEEC14 /* Audio.swift */; };
 		FB0B87F62D1B3BBD00AEEC14 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0B87F52D1B3BBD00AEEC14 /* PlayerViewModel.swift */; };
 		FB0EB0D22C6B562F00E5A859 /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EB0D12C6B562F00E5A859 /* LibraryViewModel.swift */; };
 		FB0EB0D42C6B56AE00E5A859 /* ScenarioAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EB0D32C6B56AE00E5A859 /* ScenarioAPI.swift */; };
@@ -85,7 +84,6 @@
 
 /* Begin PBXFileReference section */
 		FB0B87F12D181A2200AEEC14 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
-		FB0B87F32D1AF4AD00AEEC14 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		FB0B87F52D1B3BBD00AEEC14 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		FB0EB0D12C6B562F00E5A859 /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
 		FB0EB0D32C6B56AE00E5A859 /* ScenarioAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioAPI.swift; sourceTree = "<group>"; };
@@ -338,7 +336,6 @@
 				FBD888FB2C6606BE00BD9D73 /* Scenario.swift */,
 				FBD8892E2C6629D500BD9D73 /* Speech.swift */,
 				FB0EB0D52C6B5A3B00E5A859 /* ScenarioRemote.swift */,
-				FB0B87F32D1AF4AD00AEEC14 /* Audio.swift */,
 				FB7D10D72D5630C600AF3806 /* Role.swift */,
 			);
 			path = Models;
@@ -498,7 +495,6 @@
 				FB5D7DA72C88749800CF585B /* FilePickerView.swift in Sources */,
 				FB0EB0D22C6B562F00E5A859 /* LibraryViewModel.swift in Sources */,
 				FBD888FC2C6606BE00BD9D73 /* Scenario.swift in Sources */,
-				FB0B87F42D1AF4AD00AEEC14 /* Audio.swift in Sources */,
 				FB5D89CB2D254FAC00F4185E /* Configuration.swift in Sources */,
 				FB0B87F22D181A2200AEEC14 /* PlayerView.swift in Sources */,
 				FB2060762C95E4100070E5EA /* SpeechEditView.swift in Sources */,

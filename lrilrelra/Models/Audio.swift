@@ -5,13 +5,14 @@
 //  Created by Igor Trofimov on 24.12.2024.
 //
 
+import DittoSwift
 import Foundation
 
-struct Audio: Identifiable, Hashable, Equatable {
+struct Audio: Identifiable {
   var id: String
   var scenarioId: String
   var speechId: String
-  var audioData: Data?
+  var audioData: [String: Any?]
   var uploadedAt: Date
 }
 
@@ -28,10 +29,11 @@ extension Audio {
 
 extension Audio: DittoDecodable {
   init(value: [String: Any?]) {
+    print("Audio init: \(value)")
     self.id = value["_id"] as? String ?? ""
     self.scenarioId = value["scenarioId"] as? String ?? ""
     self.speechId = value["speechId"] as? String ?? ""
-    self.audioData = value["audioData"] as? Data ?? Data()
+    self.audioData = value["audioData"] as? [String: Any?] ?? [:]
     self.uploadedAt = value["uploadedAt"] as? Date ?? Date()
   }
 }

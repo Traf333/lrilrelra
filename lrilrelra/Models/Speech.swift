@@ -8,12 +8,13 @@
 import DittoSwift
 import Foundation
 
-struct Speech: Identifiable, Hashable, Equatable {
+struct Speech: Identifiable {
   var id: String
   var scenarioId: String
   var content: String
   var position: Int
   var isBookmark: Bool = false
+  var audioToken: [String: Any?]? = nil
 
   init(id: String, scenarioId: String, content: String, position: Int) {
     self.id = id
@@ -42,6 +43,7 @@ extension Speech: DittoDecodable {
     self.content = value["content"] as? String ?? ""
     self.position = value["position"] as? Int ?? 0
     self.isBookmark = value["isBookmark"] as? Bool ?? false
+    self.audioToken = value["audioToken"] as? [String: Any?]
   }
 }
 
